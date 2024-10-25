@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1022648215001",
+    "project_id": "tasly-aoiqqh",
+    "storage_bucket": "tasly-aoiqqh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022648215001:android:0a98875e496cf08651a5c8",
+        "android_client_info": {
+          "package_name": "com.mycompany.dashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022648215001-p9vnombnkdmj4qtquihuqrmg5g94kehl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_CI3k7-GG4mJoZSKzEMdHdm-Sv7SuuOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022648215001-p9vnombnkdmj4qtquihuqrmg5g94kehl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1022648215001-ohurrno829cc4bbrnj6446vp6v67a21r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.dashboard"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
