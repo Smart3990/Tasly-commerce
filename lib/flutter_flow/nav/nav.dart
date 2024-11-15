@@ -79,52 +79,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomeWidget() : SigninWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : SignInWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : SigninWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : SignInWidget(),
           routes: [
-            FFRoute(
-              name: 'createProfile',
-              path: 'createProfile',
-              builder: (context, params) => CreateProfileWidget(),
-            ),
-            FFRoute(
-              name: 'forgotPassword',
-              path: 'forgotPassword',
-              builder: (context, params) => ForgotPasswordWidget(),
-            ),
-            FFRoute(
-              name: 'signin',
-              path: 'signin',
-              builder: (context, params) => SigninWidget(),
-            ),
             FFRoute(
               name: 'Dashboard',
               path: 'dashboard',
+              requireAuth: true,
               builder: (context, params) => DashboardWidget(),
             ),
             FFRoute(
               name: 'home',
               path: 'home',
+              requireAuth: true,
               builder: (context, params) => HomeWidget(),
             ),
             FFRoute(
               name: 'profilePage',
               path: 'profilePage',
+              requireAuth: true,
               builder: (context, params) => ProfilePageWidget(),
             ),
             FFRoute(
               name: 'categories',
               path: 'categories',
+              requireAuth: true,
               builder: (context, params) => CategoriesWidget(),
             ),
             FFRoute(
               name: 'search',
               path: 'search',
+              requireAuth: true,
               builder: (context, params) => SearchWidget(),
             ),
             FFRoute(
@@ -135,7 +125,50 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Developer',
               path: 'developer',
+              requireAuth: true,
               builder: (context, params) => DeveloperWidget(),
+            ),
+            FFRoute(
+              name: 'SignIn',
+              path: 'signIn',
+              builder: (context, params) => SignInWidget(),
+            ),
+            FFRoute(
+              name: 'signUp',
+              path: 'signUp',
+              builder: (context, params) => SignUpWidget(),
+            ),
+            FFRoute(
+              name: 'auth_2_ForgotPassword',
+              path: 'auth2ForgotPassword',
+              builder: (context, params) => Auth2ForgotPasswordWidget(),
+            ),
+            FFRoute(
+              name: 'auth_2_createProfile',
+              path: 'auth2CreateProfile',
+              requireAuth: true,
+              builder: (context, params) => Auth2CreateProfileWidget(),
+            ),
+            FFRoute(
+              name: 'auth_2_EditProfile',
+              path: 'auth2EditProfile',
+              requireAuth: true,
+              builder: (context, params) => Auth2EditProfileWidget(),
+            ),
+            FFRoute(
+              name: 'phone',
+              path: 'phone',
+              builder: (context, params) => PhoneWidget(),
+            ),
+            FFRoute(
+              name: 'otp',
+              path: 'otp',
+              builder: (context, params) => OtpWidget(),
+            ),
+            FFRoute(
+              name: 'Cart',
+              path: 'cart',
+              builder: (context, params) => CartWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -308,7 +341,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/signin';
+            return '/signIn';
           }
           return null;
         },

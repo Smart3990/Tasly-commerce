@@ -46,11 +46,6 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "state" field.
-  String? _state;
-  String get state => _state ?? '';
-  bool hasState() => _state != null;
-
   // "bio" field.
   String? _bio;
   String get bio => _bio ?? '';
@@ -61,6 +56,56 @@ class UsersRecord extends FirestoreRecord {
   String get city => _city ?? '';
   bool hasCity() => _city != null;
 
+  // "region" field.
+  String? _region;
+  String get region => _region ?? '';
+  bool hasRegion() => _region != null;
+
+  // "email_enabel" field.
+  bool? _emailEnabel;
+  bool get emailEnabel => _emailEnabel ?? false;
+  bool hasEmailEnabel() => _emailEnabel != null;
+
+  // "shortDescription" field.
+  String? _shortDescription;
+  String get shortDescription => _shortDescription ?? '';
+  bool hasShortDescription() => _shortDescription != null;
+
+  // "last_active_time" field.
+  DateTime? _lastActiveTime;
+  DateTime? get lastActiveTime => _lastActiveTime;
+  bool hasLastActiveTime() => _lastActiveTime != null;
+
+  // "role" field.
+  String? _role;
+  String get role => _role ?? '';
+  bool hasRole() => _role != null;
+
+  // "title" field.
+  String? _title;
+  String get title => _title ?? '';
+  bool hasTitle() => _title != null;
+
+  // "IsDistributor" field.
+  bool? _isDistributor;
+  bool get isDistributor => _isDistributor ?? false;
+  bool hasIsDistributor() => _isDistributor != null;
+
+  // "IsAdmin" field.
+  bool? _isAdmin;
+  bool get isAdmin => _isAdmin ?? false;
+  bool hasIsAdmin() => _isAdmin != null;
+
+  // "IsRetailor" field.
+  bool? _isRetailor;
+  bool get isRetailor => _isRetailor ?? false;
+  bool hasIsRetailor() => _isRetailor != null;
+
+  // "DistibuterID" field.
+  String? _distibuterID;
+  String get distibuterID => _distibuterID ?? '';
+  bool hasDistibuterID() => _distibuterID != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -68,9 +113,18 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _state = snapshotData['state'] as String?;
     _bio = snapshotData['bio'] as String?;
     _city = snapshotData['city'] as String?;
+    _region = snapshotData['region'] as String?;
+    _emailEnabel = snapshotData['email_enabel'] as bool?;
+    _shortDescription = snapshotData['shortDescription'] as String?;
+    _lastActiveTime = snapshotData['last_active_time'] as DateTime?;
+    _role = snapshotData['role'] as String?;
+    _title = snapshotData['title'] as String?;
+    _isDistributor = snapshotData['IsDistributor'] as bool?;
+    _isAdmin = snapshotData['IsAdmin'] as bool?;
+    _isRetailor = snapshotData['IsRetailor'] as bool?;
+    _distibuterID = snapshotData['DistibuterID'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -113,9 +167,18 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  String? state,
   String? bio,
   String? city,
+  String? region,
+  bool? emailEnabel,
+  String? shortDescription,
+  DateTime? lastActiveTime,
+  String? role,
+  String? title,
+  bool? isDistributor,
+  bool? isAdmin,
+  bool? isRetailor,
+  String? distibuterID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -125,9 +188,18 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
-      'state': state,
       'bio': bio,
       'city': city,
+      'region': region,
+      'email_enabel': emailEnabel,
+      'shortDescription': shortDescription,
+      'last_active_time': lastActiveTime,
+      'role': role,
+      'title': title,
+      'IsDistributor': isDistributor,
+      'IsAdmin': isAdmin,
+      'IsRetailor': isRetailor,
+      'DistibuterID': distibuterID,
     }.withoutNulls,
   );
 
@@ -145,9 +217,18 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.state == e2?.state &&
         e1?.bio == e2?.bio &&
-        e1?.city == e2?.city;
+        e1?.city == e2?.city &&
+        e1?.region == e2?.region &&
+        e1?.emailEnabel == e2?.emailEnabel &&
+        e1?.shortDescription == e2?.shortDescription &&
+        e1?.lastActiveTime == e2?.lastActiveTime &&
+        e1?.role == e2?.role &&
+        e1?.title == e2?.title &&
+        e1?.isDistributor == e2?.isDistributor &&
+        e1?.isAdmin == e2?.isAdmin &&
+        e1?.isRetailor == e2?.isRetailor &&
+        e1?.distibuterID == e2?.distibuterID;
   }
 
   @override
@@ -158,9 +239,18 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.state,
         e?.bio,
-        e?.city
+        e?.city,
+        e?.region,
+        e?.emailEnabel,
+        e?.shortDescription,
+        e?.lastActiveTime,
+        e?.role,
+        e?.title,
+        e?.isDistributor,
+        e?.isAdmin,
+        e?.isRetailor,
+        e?.distibuterID
       ]);
 
   @override
