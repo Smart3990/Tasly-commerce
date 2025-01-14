@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = Tasly
+PRODUCT_NAME = taslyghana
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.dashboard
+PRODUCT_BUNDLE_IDENTIFIER = kiyuhub.tech
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 Tasly. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 taslyghana. All rights reserved.

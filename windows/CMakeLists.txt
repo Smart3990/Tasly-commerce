@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(tasly LANGUAGES CXX)
+project(taslyghana LANGUAGES CXX)
 
-set(BINARY_NAME "tasly")
+set(BINARY_NAME "taslyghana")
 
 cmake_policy(SET CMP0063 NEW)
 

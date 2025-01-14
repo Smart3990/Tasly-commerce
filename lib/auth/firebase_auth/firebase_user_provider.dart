@@ -5,8 +5,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class TaslyFirebaseUser extends BaseAuthUser {
-  TaslyFirebaseUser(this.user);
+class TaslyghanaFirebaseUser extends BaseAuthUser {
+  TaslyghanaFirebaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -32,6 +32,11 @@ class TaslyFirebaseUser extends BaseAuthUser {
   }
 
   @override
+  Future? updatePassword(String newPassword) async {
+    await user?.updatePassword(newPassword);
+  }
+
+  @override
   Future? sendEmailVerification() => user?.sendEmailVerification();
 
   @override
@@ -53,17 +58,18 @@ class TaslyFirebaseUser extends BaseAuthUser {
 
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
-  static BaseAuthUser fromFirebaseUser(User? user) => TaslyFirebaseUser(user);
+  static BaseAuthUser fromFirebaseUser(User? user) =>
+      TaslyghanaFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> taslyFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> taslyghanaFirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = TaslyFirebaseUser(user);
+        currentUser = TaslyghanaFirebaseUser(user);
         return currentUser!;
       },
     );

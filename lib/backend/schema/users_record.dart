@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -46,65 +47,85 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "bio" field.
-  String? _bio;
-  String get bio => _bio ?? '';
-  bool hasBio() => _bio != null;
+  // "userName" field.
+  String? _userName;
+  String get userName => _userName ?? '';
+  bool hasUserName() => _userName != null;
 
-  // "city" field.
-  String? _city;
-  String get city => _city ?? '';
-  bool hasCity() => _city != null;
+  // "dateOfBirth" field.
+  DateTime? _dateOfBirth;
+  DateTime? get dateOfBirth => _dateOfBirth;
+  bool hasDateOfBirth() => _dateOfBirth != null;
 
-  // "region" field.
-  String? _region;
-  String get region => _region ?? '';
-  bool hasRegion() => _region != null;
+  // "Gender" field.
+  String? _gender;
+  String get gender => _gender ?? '';
+  bool hasGender() => _gender != null;
 
-  // "email_enabel" field.
-  bool? _emailEnabel;
-  bool get emailEnabel => _emailEnabel ?? false;
-  bool hasEmailEnabel() => _emailEnabel != null;
+  // "pinCodeEnabled" field.
+  bool? _pinCodeEnabled;
+  bool get pinCodeEnabled => _pinCodeEnabled ?? false;
+  bool hasPinCodeEnabled() => _pinCodeEnabled != null;
 
-  // "shortDescription" field.
-  String? _shortDescription;
-  String get shortDescription => _shortDescription ?? '';
-  bool hasShortDescription() => _shortDescription != null;
+  // "biometricEnabled" field.
+  bool? _biometricEnabled;
+  bool get biometricEnabled => _biometricEnabled ?? false;
+  bool hasBiometricEnabled() => _biometricEnabled != null;
 
-  // "last_active_time" field.
-  DateTime? _lastActiveTime;
-  DateTime? get lastActiveTime => _lastActiveTime;
-  bool hasLastActiveTime() => _lastActiveTime != null;
+  // "onboardingFinished" field.
+  bool? _onboardingFinished;
+  bool get onboardingFinished => _onboardingFinished ?? false;
+  bool hasOnboardingFinished() => _onboardingFinished != null;
 
-  // "role" field.
-  String? _role;
-  String get role => _role ?? '';
-  bool hasRole() => _role != null;
+  // "pin_code" field.
+  String? _pinCode;
+  String get pinCode => _pinCode ?? '';
+  bool hasPinCode() => _pinCode != null;
 
-  // "title" field.
-  String? _title;
-  String get title => _title ?? '';
-  bool hasTitle() => _title != null;
+  // "products_liked" field.
+  List<DocumentReference>? _productsLiked;
+  List<DocumentReference> get productsLiked => _productsLiked ?? const [];
+  bool hasProductsLiked() => _productsLiked != null;
 
-  // "IsDistributor" field.
+  // "isSupportAgent" field.
+  bool? _isSupportAgent;
+  bool get isSupportAgent => _isSupportAgent ?? false;
+  bool hasIsSupportAgent() => _isSupportAgent != null;
+
+  // "wallet" field.
+  DocumentReference? _wallet;
+  DocumentReference? get wallet => _wallet;
+  bool hasWallet() => _wallet != null;
+
+  // "default_shipping_address" field.
+  DocumentReference? _defaultShippingAddress;
+  DocumentReference? get defaultShippingAddress => _defaultShippingAddress;
+  bool hasDefaultShippingAddress() => _defaultShippingAddress != null;
+
+  // "promo_codes" field.
+  List<DocumentReference>? _promoCodes;
+  List<DocumentReference> get promoCodes => _promoCodes ?? const [];
+  bool hasPromoCodes() => _promoCodes != null;
+
+  // "cart_ref" field.
+  DocumentReference? _cartRef;
+  DocumentReference? get cartRef => _cartRef;
+  bool hasCartRef() => _cartRef != null;
+
+  // "isDistributor" field.
   bool? _isDistributor;
   bool get isDistributor => _isDistributor ?? false;
   bool hasIsDistributor() => _isDistributor != null;
 
-  // "IsAdmin" field.
-  bool? _isAdmin;
-  bool get isAdmin => _isAdmin ?? false;
-  bool hasIsAdmin() => _isAdmin != null;
+  // "isPro" field.
+  bool? _isPro;
+  bool get isPro => _isPro ?? false;
+  bool hasIsPro() => _isPro != null;
 
-  // "IsRetailor" field.
-  bool? _isRetailor;
-  bool get isRetailor => _isRetailor ?? false;
-  bool hasIsRetailor() => _isRetailor != null;
-
-  // "DistibuterID" field.
-  String? _distibuterID;
-  String get distibuterID => _distibuterID ?? '';
-  bool hasDistibuterID() => _distibuterID != null;
+  // "DistributorId" field.
+  String? _distributorId;
+  String get distributorId => _distributorId ?? '';
+  bool hasDistributorId() => _distributorId != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -113,18 +134,23 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _bio = snapshotData['bio'] as String?;
-    _city = snapshotData['city'] as String?;
-    _region = snapshotData['region'] as String?;
-    _emailEnabel = snapshotData['email_enabel'] as bool?;
-    _shortDescription = snapshotData['shortDescription'] as String?;
-    _lastActiveTime = snapshotData['last_active_time'] as DateTime?;
-    _role = snapshotData['role'] as String?;
-    _title = snapshotData['title'] as String?;
-    _isDistributor = snapshotData['IsDistributor'] as bool?;
-    _isAdmin = snapshotData['IsAdmin'] as bool?;
-    _isRetailor = snapshotData['IsRetailor'] as bool?;
-    _distibuterID = snapshotData['DistibuterID'] as String?;
+    _userName = snapshotData['userName'] as String?;
+    _dateOfBirth = snapshotData['dateOfBirth'] as DateTime?;
+    _gender = snapshotData['Gender'] as String?;
+    _pinCodeEnabled = snapshotData['pinCodeEnabled'] as bool?;
+    _biometricEnabled = snapshotData['biometricEnabled'] as bool?;
+    _onboardingFinished = snapshotData['onboardingFinished'] as bool?;
+    _pinCode = snapshotData['pin_code'] as String?;
+    _productsLiked = getDataList(snapshotData['products_liked']);
+    _isSupportAgent = snapshotData['isSupportAgent'] as bool?;
+    _wallet = snapshotData['wallet'] as DocumentReference?;
+    _defaultShippingAddress =
+        snapshotData['default_shipping_address'] as DocumentReference?;
+    _promoCodes = getDataList(snapshotData['promo_codes']);
+    _cartRef = snapshotData['cart_ref'] as DocumentReference?;
+    _isDistributor = snapshotData['isDistributor'] as bool?;
+    _isPro = snapshotData['isPro'] as bool?;
+    _distributorId = snapshotData['DistributorId'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -167,18 +193,20 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  String? bio,
-  String? city,
-  String? region,
-  bool? emailEnabel,
-  String? shortDescription,
-  DateTime? lastActiveTime,
-  String? role,
-  String? title,
+  String? userName,
+  DateTime? dateOfBirth,
+  String? gender,
+  bool? pinCodeEnabled,
+  bool? biometricEnabled,
+  bool? onboardingFinished,
+  String? pinCode,
+  bool? isSupportAgent,
+  DocumentReference? wallet,
+  DocumentReference? defaultShippingAddress,
+  DocumentReference? cartRef,
   bool? isDistributor,
-  bool? isAdmin,
-  bool? isRetailor,
-  String? distibuterID,
+  bool? isPro,
+  String? distributorId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -188,18 +216,20 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
-      'bio': bio,
-      'city': city,
-      'region': region,
-      'email_enabel': emailEnabel,
-      'shortDescription': shortDescription,
-      'last_active_time': lastActiveTime,
-      'role': role,
-      'title': title,
-      'IsDistributor': isDistributor,
-      'IsAdmin': isAdmin,
-      'IsRetailor': isRetailor,
-      'DistibuterID': distibuterID,
+      'userName': userName,
+      'dateOfBirth': dateOfBirth,
+      'Gender': gender,
+      'pinCodeEnabled': pinCodeEnabled,
+      'biometricEnabled': biometricEnabled,
+      'onboardingFinished': onboardingFinished,
+      'pin_code': pinCode,
+      'isSupportAgent': isSupportAgent,
+      'wallet': wallet,
+      'default_shipping_address': defaultShippingAddress,
+      'cart_ref': cartRef,
+      'isDistributor': isDistributor,
+      'isPro': isPro,
+      'DistributorId': distributorId,
     }.withoutNulls,
   );
 
@@ -211,24 +241,29 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
 
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.bio == e2?.bio &&
-        e1?.city == e2?.city &&
-        e1?.region == e2?.region &&
-        e1?.emailEnabel == e2?.emailEnabel &&
-        e1?.shortDescription == e2?.shortDescription &&
-        e1?.lastActiveTime == e2?.lastActiveTime &&
-        e1?.role == e2?.role &&
-        e1?.title == e2?.title &&
+        e1?.userName == e2?.userName &&
+        e1?.dateOfBirth == e2?.dateOfBirth &&
+        e1?.gender == e2?.gender &&
+        e1?.pinCodeEnabled == e2?.pinCodeEnabled &&
+        e1?.biometricEnabled == e2?.biometricEnabled &&
+        e1?.onboardingFinished == e2?.onboardingFinished &&
+        e1?.pinCode == e2?.pinCode &&
+        listEquality.equals(e1?.productsLiked, e2?.productsLiked) &&
+        e1?.isSupportAgent == e2?.isSupportAgent &&
+        e1?.wallet == e2?.wallet &&
+        e1?.defaultShippingAddress == e2?.defaultShippingAddress &&
+        listEquality.equals(e1?.promoCodes, e2?.promoCodes) &&
+        e1?.cartRef == e2?.cartRef &&
         e1?.isDistributor == e2?.isDistributor &&
-        e1?.isAdmin == e2?.isAdmin &&
-        e1?.isRetailor == e2?.isRetailor &&
-        e1?.distibuterID == e2?.distibuterID;
+        e1?.isPro == e2?.isPro &&
+        e1?.distributorId == e2?.distributorId;
   }
 
   @override
@@ -239,18 +274,22 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.bio,
-        e?.city,
-        e?.region,
-        e?.emailEnabel,
-        e?.shortDescription,
-        e?.lastActiveTime,
-        e?.role,
-        e?.title,
+        e?.userName,
+        e?.dateOfBirth,
+        e?.gender,
+        e?.pinCodeEnabled,
+        e?.biometricEnabled,
+        e?.onboardingFinished,
+        e?.pinCode,
+        e?.productsLiked,
+        e?.isSupportAgent,
+        e?.wallet,
+        e?.defaultShippingAddress,
+        e?.promoCodes,
+        e?.cartRef,
         e?.isDistributor,
-        e?.isAdmin,
-        e?.isRetailor,
-        e?.distibuterID
+        e?.isPro,
+        e?.distributorId
       ]);
 
   @override

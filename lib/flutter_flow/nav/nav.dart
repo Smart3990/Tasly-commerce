@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -20,6 +22,8 @@ export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
+
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -78,101 +82,358 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomeWidget() : SignInWidget(),
+      navigatorKey: appNavigatorKey,
+      errorBuilder: (context, state) => RootPageContext.wrap(
+        appStateNotifier.loggedIn ? HomeWidget() : StartWidget(),
+        errorRoute: state.uri.toString(),
+      ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : SignInWidget(),
-          routes: [
-            FFRoute(
-              name: 'Dashboard',
-              path: 'dashboard',
-              requireAuth: true,
-              builder: (context, params) => DashboardWidget(),
-            ),
-            FFRoute(
-              name: 'home',
-              path: 'home',
-              requireAuth: true,
-              builder: (context, params) => HomeWidget(),
-            ),
-            FFRoute(
-              name: 'profilePage',
-              path: 'profilePage',
-              requireAuth: true,
-              builder: (context, params) => ProfilePageWidget(),
-            ),
-            FFRoute(
-              name: 'categories',
-              path: 'categories',
-              requireAuth: true,
-              builder: (context, params) => CategoriesWidget(),
-            ),
-            FFRoute(
-              name: 'search',
-              path: 'search',
-              requireAuth: true,
-              builder: (context, params) => SearchWidget(),
-            ),
-            FFRoute(
-              name: 'homeCopyCopy',
-              path: 'homeCopyCopy',
-              builder: (context, params) => HomeCopyCopyWidget(),
-            ),
-            FFRoute(
-              name: 'Developer',
-              path: 'developer',
-              requireAuth: true,
-              builder: (context, params) => DeveloperWidget(),
-            ),
-            FFRoute(
-              name: 'SignIn',
-              path: 'signIn',
-              builder: (context, params) => SignInWidget(),
-            ),
-            FFRoute(
-              name: 'signUp',
-              path: 'signUp',
-              builder: (context, params) => SignUpWidget(),
-            ),
-            FFRoute(
-              name: 'auth_2_ForgotPassword',
-              path: 'auth2ForgotPassword',
-              builder: (context, params) => Auth2ForgotPasswordWidget(),
-            ),
-            FFRoute(
-              name: 'auth_2_createProfile',
-              path: 'auth2CreateProfile',
-              requireAuth: true,
-              builder: (context, params) => Auth2CreateProfileWidget(),
-            ),
-            FFRoute(
-              name: 'auth_2_EditProfile',
-              path: 'auth2EditProfile',
-              requireAuth: true,
-              builder: (context, params) => Auth2EditProfileWidget(),
-            ),
-            FFRoute(
-              name: 'phone',
-              path: 'phone',
-              builder: (context, params) => PhoneWidget(),
-            ),
-            FFRoute(
-              name: 'otp',
-              path: 'otp',
-              builder: (context, params) => OtpWidget(),
-            ),
-            FFRoute(
-              name: 'Cart',
-              path: 'cart',
-              builder: (context, params) => CartWidget(),
-            )
-          ].map((r) => r.toRoute(appStateNotifier)).toList(),
+          builder: (context, _) => RootPageContext.wrap(
+            appStateNotifier.loggedIn ? HomeWidget() : StartWidget(),
+          ),
         ),
+        FFRoute(
+          name: 'Start',
+          path: '/start',
+          builder: (context, params) => StartWidget(),
+        ),
+        FFRoute(
+          name: 'OnBoarding',
+          path: '/onBoarding',
+          builder: (context, params) => OnBoardingWidget(),
+        ),
+        FFRoute(
+          name: 'Login',
+          path: '/login',
+          builder: (context, params) => LoginWidget(),
+        ),
+        FFRoute(
+          name: 'onBoard_Profile',
+          path: '/onBoardProfile',
+          requireAuth: true,
+          builder: (context, params) => OnBoardProfileWidget(),
+        ),
+        FFRoute(
+          name: 'pinCodeSet',
+          path: '/pinCodeSet',
+          builder: (context, params) => PinCodeSetWidget(),
+        ),
+        FFRoute(
+          name: 'BiometricSet',
+          path: '/biometricSet',
+          builder: (context, params) => BiometricSetWidget(),
+        ),
+        FFRoute(
+          name: 'ForgotPass',
+          path: '/forgotPass',
+          builder: (context, params) => ForgotPassWidget(
+            email: params.getParam(
+              'email',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Home',
+          path: '/home',
+          requireAuth: true,
+          builder: (context, params) => HomeWidget(),
+        ),
+        FFRoute(
+          name: 'Cart',
+          path: '/cart',
+          requireAuth: true,
+          builder: (context, params) => CartWidget(),
+        ),
+        FFRoute(
+          name: 'Notifications',
+          path: '/notifications',
+          requireAuth: true,
+          builder: (context, params) => NotificationsWidget(),
+        ),
+        FFRoute(
+          name: 'WishLIst',
+          path: '/wishLIst',
+          requireAuth: true,
+          builder: (context, params) => WishLIstWidget(),
+        ),
+        FFRoute(
+          name: 'SpecialOffers',
+          path: '/specialOffers',
+          requireAuth: true,
+          builder: (context, params) => SpecialOffersWidget(),
+        ),
+        FFRoute(
+          name: 'Products',
+          path: '/products',
+          requireAuth: true,
+          asyncParams: {
+            'specialOffer':
+                getDoc(['specialOffer'], SpecialOfferRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProductsWidget(
+            pageTitle: params.getParam(
+              'pageTitle',
+              ParamType.String,
+            ),
+            specialOffer: params.getParam(
+              'specialOffer',
+              ParamType.Document,
+            ),
+            showMostPopular: params.getParam(
+              'showMostPopular',
+              ParamType.bool,
+            ),
+            showSpecialOffer: params.getParam(
+              'showSpecialOffer',
+              ParamType.bool,
+            ),
+            showActiveCategory: params.getParam(
+              'showActiveCategory',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Search',
+          path: '/search',
+          requireAuth: true,
+          builder: (context, params) => SearchWidget(),
+        ),
+        FFRoute(
+          name: 'ProductDetail',
+          path: '/ProductDetail',
+          requireAuth: true,
+          asyncParams: {
+            'product': getDoc(['product'], ProductRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProductDetailWidget(
+            product: params.getParam(
+              'product',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Reviews',
+          path: '/reviews',
+          requireAuth: true,
+          asyncParams: {
+            'product': getDoc(['product'], ProductRecord.fromSnapshot),
+          },
+          builder: (context, params) => ReviewsWidget(
+            product: params.getParam(
+              'product',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CheckOut',
+          path: '/checkOut',
+          requireAuth: true,
+          builder: (context, params) => CheckOutWidget(
+            orderRef: params.getParam(
+              'orderRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['order'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ShippingMethods',
+          path: '/shippingMethods',
+          requireAuth: true,
+          builder: (context, params) => ShippingMethodsWidget(),
+        ),
+        FFRoute(
+          name: 'LoginSecure',
+          path: '/loginSecure',
+          requireAuth: true,
+          builder: (context, params) => LoginSecureWidget(
+            securityType: params.getParam(
+              'securityType',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'OrderHistory',
+          path: '/orderHistory',
+          requireAuth: true,
+          builder: (context, params) => OrderHistoryWidget(),
+        ),
+        FFRoute(
+          name: 'Wallet',
+          path: '/wallet',
+          requireAuth: true,
+          builder: (context, params) => WalletWidget(),
+        ),
+        FFRoute(
+          name: 'TrackOrder',
+          path: '/trackOrder',
+          requireAuth: true,
+          asyncParams: {
+            'order': getDoc(['order'], OrderRecord.fromSnapshot),
+          },
+          builder: (context, params) => TrackOrderWidget(
+            order: params.getParam(
+              'order',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'TopUp',
+          path: '/topUp',
+          requireAuth: true,
+          asyncParams: {
+            'wallet': getDoc(['wallet'], WalletRecord.fromSnapshot),
+          },
+          builder: (context, params) => TopUpWidget(
+            wallet: params.getParam(
+              'wallet',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Transactions',
+          path: '/transactions',
+          requireAuth: true,
+          builder: (context, params) => TransactionsWidget(
+            walletRef: params.getParam(
+              'walletRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['wallet'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'E-Receipt',
+          path: '/eReceipt',
+          requireAuth: true,
+          asyncParams: {
+            'order': getDoc(['order'], OrderRecord.fromSnapshot),
+          },
+          builder: (context, params) => EReceiptWidget(
+            order: params.getParam(
+              'order',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Profile',
+          path: '/profile',
+          requireAuth: true,
+          builder: (context, params) => ProfileWidget(),
+        ),
+        FFRoute(
+          name: 'ProfileEdit',
+          path: '/profileEdit',
+          requireAuth: true,
+          builder: (context, params) => ProfileEditWidget(),
+        ),
+        FFRoute(
+          name: 'Address',
+          path: '/address',
+          requireAuth: true,
+          builder: (context, params) => AddressWidget(),
+        ),
+        FFRoute(
+          name: 'SettingNotification',
+          path: '/settingNotification',
+          requireAuth: true,
+          builder: (context, params) => SettingNotificationWidget(),
+        ),
+        FFRoute(
+          name: 'PaymentMethods',
+          path: '/paymentMethods',
+          requireAuth: true,
+          builder: (context, params) => PaymentMethodsWidget(),
+        ),
+        FFRoute(
+          name: 'NewCard',
+          path: '/newCard',
+          requireAuth: true,
+          builder: (context, params) => NewCardWidget(),
+        ),
+        FFRoute(
+          name: 'Security',
+          path: '/security',
+          requireAuth: true,
+          builder: (context, params) => SecurityWidget(),
+        ),
+        FFRoute(
+          name: 'Language',
+          path: '/language',
+          requireAuth: true,
+          builder: (context, params) => LanguageWidget(),
+        ),
+        FFRoute(
+          name: 'PrivacyPolicy',
+          path: '/privacyPolicy',
+          builder: (context, params) => PrivacyPolicyWidget(),
+        ),
+        FFRoute(
+          name: 'InviteContacts',
+          path: '/inviteContacts',
+          requireAuth: true,
+          builder: (context, params) => InviteContactsWidget(),
+        ),
+        FFRoute(
+          name: 'HelpCenter',
+          path: '/helpCenter',
+          requireAuth: true,
+          builder: (context, params) => HelpCenterWidget(),
+        ),
+        FFRoute(
+          name: 'CustomerSupport',
+          path: '/customerSupport',
+          requireAuth: true,
+          builder: (context, params) => CustomerSupportWidget(),
+        ),
+        FFRoute(
+          name: 'Signup',
+          path: '/signup',
+          builder: (context, params) => SignupWidget(),
+        ),
+        FFRoute(
+          name: 'SecurityChoice',
+          path: '/securityChoice',
+          builder: (context, params) => SecurityChoiceWidget(),
+        ),
+        FFRoute(
+          name: 'loginMethod',
+          path: '/loginMethod',
+          builder: (context, params) => LoginMethodWidget(),
+        ),
+        FFRoute(
+          name: 'Cartdis',
+          path: '/cartdis',
+          requireAuth: true,
+          builder: (context, params) => CartdisWidget(),
+        ),
+        FFRoute(
+          name: 'developer',
+          path: '/developer',
+          requireAuth: true,
+          builder: (context, params) => DeveloperWidget(),
+        ),
+        FFRoute(
+          name: 'ContactUs',
+          path: '/contactUs',
+          requireAuth: true,
+          builder: (context, params) => ContactUsWidget(),
+        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -290,6 +551,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -308,6 +570,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -341,7 +604,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/signIn';
+            return '/start';
           }
           return null;
         },
@@ -355,14 +618,14 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Container(
-                  color: Colors.transparent,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/Tasly_Healthcare_Store-selar.co-20231230063619-removebg-preview.png',
-                      width: 70.0,
-                      height: 70.0,
-                      fit: BoxFit.contain,
+              ? Center(
+                  child: SizedBox(
+                    width: 44.0,
+                    height: 44.0,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
                     ),
                   ),
                 )
@@ -408,7 +671,12 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(
+        hasTransition: true,
+        transitionType: PageTransitionType.scale,
+        alignment: Alignment.bottomCenter,
+        duration: Duration(milliseconds: 200),
+      );
 }
 
 class RootPageContext {

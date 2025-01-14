@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "1022648215001",
-    "project_id": "tasly-aoiqqh",
-    "storage_bucket": "tasly-aoiqqh.appspot.com"
+    "project_number": "991311879808",
+    "project_id": "unused-fdjvyp",
+    "storage_bucket": "unused-fdjvyp.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1022648215001:android:0a98875e496cf08651a5c8",
+        "mobilesdk_app_id": "1:991311879808:android:57665a5e64999013ae5065",
         "android_client_info": {
-          "package_name": "com.mycompany.dashboard"
+          "package_name": "kiyuhub.tech"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "1022648215001-p9vnombnkdmj4qtquihuqrmg5g94kehl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC_CI3k7-GG4mJoZSKzEMdHdm-Sv7SuuOM"
+          "current_key": "AIzaSyDi2JVkIePmdaKdAUAIab85aKl9O5V0r3g"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1022648215001-p9vnombnkdmj4qtquihuqrmg5g94kehl.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1022648215001-ohurrno829cc4bbrnj6446vp6v67a21r.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.mycompany.dashboard"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

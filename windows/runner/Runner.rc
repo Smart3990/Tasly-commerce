@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "Tasly" "\0"
+            VALUE "CompanyName", "taslyghana" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "Tasly" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 Tasly. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tasly.exe" "\0"
-            VALUE "ProductName", "Tasly" "\0"
+            VALUE "InternalName", "taslyghana" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 taslyghana. All rights reserved." "\0"
+            VALUE "OriginalFilename", "taslyghana.exe" "\0"
+            VALUE "ProductName", "taslyghana" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

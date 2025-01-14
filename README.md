@@ -1,4 +1,4 @@
-# Tasly
+# taslyghana
 
 A new Flutter project.
 

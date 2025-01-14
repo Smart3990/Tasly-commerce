@@ -8,10 +8,13 @@
     The path provided below has to start and end with a slash "/" in order for
     it to work correctly.
 
+    Alternatively, build your application passing the --base-href parameter
+    specifying the new root path of your web app.
+
     Fore more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
   -->
-  <base href="/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -19,32 +22,31 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Tasly">
+  <meta name="apple-mobile-web-app-title" content="Tasly Ghana">
 
   
 
   <meta name="robots" content="noindex" />
 
   <!-- Favicon -->
-  <link rel="icon" href="Tasly_Healthcare_Store-selar.co-20231230063619-removebg-preview.png" sizes="any"/>
-  
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <!-- Open Graph & SEO tags -->
-  <meta property="og:title" content="Tasly ghana web app" />
+  <meta property="og:title" content="Tasly Ghana" />
   <meta property="og:description" content="Built with FlutterFlow." />
-  <meta property="og:image" content="/assets/assets/images/Tasly_Healthcare_Store-selar.co-20231230063619-removebg-preview.png" /> 
-  <meta name="twitter:title" content="Tasly ghana web app" />
+  <meta property="og:image" content="https://storage.googleapis.com/flutterflow-prod-hosting/og_splash_gradient.png" /> 
+  <meta name="twitter:title" content="Tasly Ghana" />
   <meta name="twitter:description" content="Built with FlutterFlow." />
-  <meta name="twitter:image" content="/assets/assets/images/Tasly_Healthcare_Store-selar.co-20231230063619-removebg-preview.png" />
+  <meta name="twitter:image" content="https://storage.googleapis.com/flutterflow-prod-hosting/og_splash_gradient.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <title> Tasly ghana web app </title>
+  <title> Tasly Ghana </title>
   <meta name="description" content="Built with FlutterFlow." />
     
 
   <!-- Status Bar color in Safari browser (iOS) and PWA -->
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f1f4f8">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#121926">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#1d2428">
 
   <link rel="manifest" href="manifest.json">
   
