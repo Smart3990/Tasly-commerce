@@ -16,25 +16,27 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'biometric_set_model.dart';
-export 'biometric_set_model.dart';
+import 'loginsecurebiometric_model.dart';
+export 'loginsecurebiometric_model.dart';
 
-class BiometricSetWidget extends StatefulWidget {
-  const BiometricSetWidget({super.key});
+class LoginsecurebiometricWidget extends StatefulWidget {
+  const LoginsecurebiometricWidget({super.key});
 
   @override
-  State<BiometricSetWidget> createState() => _BiometricSetWidgetState();
+  State<LoginsecurebiometricWidget> createState() =>
+      _LoginsecurebiometricWidgetState();
 }
 
-class _BiometricSetWidgetState extends State<BiometricSetWidget> {
-  late BiometricSetModel _model;
+class _LoginsecurebiometricWidgetState
+    extends State<LoginsecurebiometricWidget> {
+  late LoginsecurebiometricModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BiometricSetModel());
+    _model = createModel(context, () => LoginsecurebiometricModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -45,7 +47,7 @@ class _BiometricSetWidgetState extends State<BiometricSetWidget> {
         try {
           _model.biometricEnabled = await _localAuth.authenticate(
               localizedReason: FFLocalizations.of(context).getText(
-            '1aj8l8ph' /* You want to enable the biometr... */,
+            '1fhj7wxn' /* You want to enable the biometr... */,
           ));
         } on PlatformException {
           _model.biometricEnabled = false;
@@ -86,18 +88,7 @@ class _BiometricSetWidgetState extends State<BiometricSetWidget> {
           },
         ).then((value) => safeSetState(() {}));
 
-        context.goNamed(
-          'loginsecurebiometric',
-          extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.fade,
-              duration: Duration(milliseconds: 0),
-            ),
-          },
-        );
-
-        context.pushNamed('Home');
+        context.goNamed('Home');
       } else {
         await showModalBottomSheet(
           isScrollControlled: true,
@@ -125,7 +116,10 @@ class _BiometricSetWidgetState extends State<BiometricSetWidget> {
                   confirmButtonText: 'Set Pin Code',
                   hasCustomConfirmAction: true,
                   confirmCustomAction: () async {
-                    context.goNamed('SecurityChoice');
+                    if (Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
+                    context.pushNamed('SecurityChoice');
                   },
                 ),
               ),
@@ -150,7 +144,7 @@ class _BiometricSetWidgetState extends State<BiometricSetWidget> {
     context.watch<FFAppState>();
 
     return Title(
-        title: 'BiometricSet',
+        title: 'loginsecurebiometric',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
           onTap: () {
@@ -172,7 +166,7 @@ class _BiometricSetWidgetState extends State<BiometricSetWidget> {
                     updateCallback: () => safeSetState(() {}),
                     child: HeaderWidget(
                       title: FFLocalizations.of(context).getText(
-                        'r383okhi' /* Set Your Fingerprint */,
+                        'uutz0tmu' /* Scan Fingerprint */,
                       ),
                       showBackButton: true,
                     ),
@@ -215,7 +209,7 @@ class _BiometricSetWidgetState extends State<BiometricSetWidget> {
                                     Expanded(
                                       child: Text(
                                         FFLocalizations.of(context).getText(
-                                          'w6hnxwg3' /* Please put your finger on the ... */,
+                                          '7fx4pm5v' /* Please put your finger on the ... */,
                                         ),
                                         textAlign: TextAlign.center,
                                         maxLines: 3,

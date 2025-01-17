@@ -343,6 +343,12 @@ class FFAppState extends ChangeNotifier {
     _isDistributor = value;
   }
 
+  String _securityPass = '';
+  String get securityPass => _securityPass;
+  set securityPass(String value) {
+    _securityPass = value;
+  }
+
   final _allProductsManager = FutureRequestManager<List<ProductRecord>>();
   Future<List<ProductRecord>> allProducts({
     String? uniqueQueryKey,

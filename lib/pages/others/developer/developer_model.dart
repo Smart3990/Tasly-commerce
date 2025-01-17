@@ -1,4 +1,3 @@
-import '/components/other_component/header/header_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -20,8 +19,6 @@ import 'package:provider/provider.dart';
 class DeveloperModel extends FlutterFlowModel<DeveloperWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Model for Header component.
-  late HeaderModel headerModel;
   // State field(s) for Expandable widget.
   late ExpandableController expandableExpandableController1;
 
@@ -126,13 +123,10 @@ class DeveloperModel extends FlutterFlowModel<DeveloperWidget> {
   String? Function(BuildContext, String?)? textController9Validator;
 
   @override
-  void initState(BuildContext context) {
-    headerModel = createModel(context, () => HeaderModel());
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    headerModel.dispose();
     expandableExpandableController1.dispose();
     expandableExpandableController2.dispose();
     expandableExpandableController3.dispose();

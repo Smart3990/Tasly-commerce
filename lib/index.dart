@@ -62,3 +62,8 @@ export '/pages/auth/login_method/login_method_widget.dart'
 export '/pages/home/cartdis/cartdis_widget.dart' show CartdisWidget;
 export '/pages/others/developer/developer_widget.dart' show DeveloperWidget;
 export '/pages/others/contact_us/contact_us_widget.dart' show ContactUsWidget;
+export '/pages/home/scan/scan_widget.dart' show ScanWidget;
+export '/pages/security/loginsecurebiometric/loginsecurebiometric_widget.dart'
+    show LoginsecurebiometricWidget;
+export '/forgetpin/forgetpin_widget.dart' show ForgetpinWidget;
+export '/request_pin/request_pin_widget.dart' show RequestPinWidget;

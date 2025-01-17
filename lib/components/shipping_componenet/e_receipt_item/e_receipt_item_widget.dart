@@ -116,35 +116,6 @@ class _EReceiptItemWidgetState extends State<EReceiptItemWidget> {
                                   ),
                             ),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  'cf6c881o' /* Color */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 0.0, 0.0, 0.0),
-                                child: Container(
-                                  width: 16.0,
-                                  height: 16.0,
-                                  decoration: BoxDecoration(
-                                    color: widget!.color,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                       Flexible(
@@ -172,39 +143,6 @@ class _EReceiptItemWidgetState extends State<EReceiptItemWidget> {
                                     ),
                                     TextSpan(
                                       text: widget!.qty!.toString(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelSmall
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    )
-                                  ],
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                              RichText(
-                                textScaler: MediaQuery.of(context).textScaler,
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: FFLocalizations.of(context).getText(
-                                        'pudj1h2p' /* Size =  */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelSmall
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    TextSpan(
-                                      text: widget!.size!.toString(),
                                       style: FlutterFlowTheme.of(context)
                                           .labelSmall
                                           .override(

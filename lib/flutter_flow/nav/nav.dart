@@ -431,6 +431,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/contactUs',
           requireAuth: true,
           builder: (context, params) => ContactUsWidget(),
+        ),
+        FFRoute(
+          name: 'scan',
+          path: '/scan',
+          builder: (context, params) => ScanWidget(),
+        ),
+        FFRoute(
+          name: 'loginsecurebiometric',
+          path: '/loginsecurebiometric',
+          builder: (context, params) => LoginsecurebiometricWidget(),
+        ),
+        FFRoute(
+          name: 'Forgetpin',
+          path: '/forgetpin',
+          builder: (context, params) => ForgetpinWidget(),
+        ),
+        FFRoute(
+          name: 'RequestPin',
+          path: '/requestPin',
+          builder: (context, params) => RequestPinWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

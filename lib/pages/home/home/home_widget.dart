@@ -345,6 +345,21 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               context.pushNamed('WishLIst');
                                             },
                                           ),
+                                          FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 10.0,
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              FFIcons.kscanDash,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              context.pushNamed('scan');
+                                            },
+                                          ),
                                         ],
                                       ),
                                     ],

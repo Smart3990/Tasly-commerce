@@ -127,6 +127,11 @@ class UsersRecord extends FirestoreRecord {
   String get distributorId => _distributorId ?? '';
   bool hasDistributorId() => _distributorId != null;
 
+  // "securityPass" field.
+  String? _securityPass;
+  String get securityPass => _securityPass ?? '';
+  bool hasSecurityPass() => _securityPass != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -151,6 +156,7 @@ class UsersRecord extends FirestoreRecord {
     _isDistributor = snapshotData['isDistributor'] as bool?;
     _isPro = snapshotData['isPro'] as bool?;
     _distributorId = snapshotData['DistributorId'] as String?;
+    _securityPass = snapshotData['securityPass'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -207,6 +213,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? isDistributor,
   bool? isPro,
   String? distributorId,
+  String? securityPass,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -230,6 +237,7 @@ Map<String, dynamic> createUsersRecordData({
       'isDistributor': isDistributor,
       'isPro': isPro,
       'DistributorId': distributorId,
+      'securityPass': securityPass,
     }.withoutNulls,
   );
 
@@ -263,7 +271,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.cartRef == e2?.cartRef &&
         e1?.isDistributor == e2?.isDistributor &&
         e1?.isPro == e2?.isPro &&
-        e1?.distributorId == e2?.distributorId;
+        e1?.distributorId == e2?.distributorId &&
+        e1?.securityPass == e2?.securityPass;
   }
 
   @override
@@ -289,7 +298,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.cartRef,
         e?.isDistributor,
         e?.isPro,
-        e?.distributorId
+        e?.distributorId,
+        e?.securityPass
       ]);
 
   @override

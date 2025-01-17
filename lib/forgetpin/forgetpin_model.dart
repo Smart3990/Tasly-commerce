@@ -1,28 +1,24 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/other_component/header/header_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
 import 'dart:ui';
-import 'contact_us_widget.dart' show ContactUsWidget;
+import 'forgetpin_widget.dart' show ForgetpinWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class ContactUsModel extends FlutterFlowModel<ContactUsWidget> {
-  ///  Local state fields for this page.
-
-  bool showAnswer = false;
-
+class ForgetpinModel extends FlutterFlowModel<ForgetpinWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for Header component.
   late HeaderModel headerModel;
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -32,6 +28,7 @@ class ContactUsModel extends FlutterFlowModel<ContactUsWidget> {
   @override
   void dispose() {
     headerModel.dispose();
-    tabBarController?.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 }

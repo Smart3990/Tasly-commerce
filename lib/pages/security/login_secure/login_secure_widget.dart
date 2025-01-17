@@ -225,21 +225,43 @@ You ca... */
                                           .asValidator(context),
                                     ),
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      safeSetState(() {
-                                        _model.pinCodeController?.clear();
-                                      });
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed('Forgetpin');
+                                        },
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'aoo8d89i' /* Forget pin */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color: Color(0xFF5C4BF6),
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          safeSetState(() {
+                                            _model.pinCodeController?.clear();
+                                          });
+                                        },
+                                        child: Text(
                                           FFLocalizations.of(context).getText(
                                             '4gjcta9j' /* Clear */,
                                           ),
@@ -253,8 +275,8 @@ You ca... */
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

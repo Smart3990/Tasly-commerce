@@ -786,7 +786,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                       onPressed: () async {
                         await currentUserReference!
                             .update(createUsersRecordData(
-                          phoneNumber: _model.distributorIdTextController.text,
+                          phoneNumber: _model.tfPhoneTextController.text,
                           userName: _model.tfUserNameTextController.text,
                           gender: _model.ddGenderValue,
                           displayName:

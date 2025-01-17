@@ -363,11 +363,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Correo electrónico',
       'fr': 'E-mail',
     },
-    'w5n06ao7': {
-      'en': '+13025079012',
-      'ar': 'الاسم الكامل',
-      'es': 'Nombre completo',
-      'fr': 'Nom et prénom',
+    'igy2xsyx': {
+      'en': '+233756746744',
+      'ar': '',
+      'es': '',
+      'fr': '',
     },
     'tmuiwm99': {
       'en': 'Gender',
@@ -1041,6 +1041,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'Introduce tu número pin\n\nNota: el código PIN de demostración es 1111\n\nPuede habilitar/deshabilitar la capa segura de código PIN en la página de perfil/seguridad',
       'fr':
           'Entrez votre code PIN\n\nRemarque : le code PIN de la démo est 1111.\n\nVous pouvez activer/désactiver la couche sécurisée par code PIN dans la page de profil/sécurité',
+    },
+    'aoo8d89i': {
+      'en': 'Forget pin',
+      'ar': '',
+      'es': '',
+      'fr': '',
     },
     '4gjcta9j': {
       'en': 'Clear',
@@ -3746,13 +3752,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Contactez-nous',
     },
     'lw2jy31k': {
-      'en': '+233 59 900 4548',
+      'en': 'Manager',
       'ar': 'اتصل بنا',
       'es': 'Contáctenos',
       'fr': 'Contactez-nous',
     },
     'r2inuv0w': {
-      'en': '+233 59 887 0400',
+      'en': 'Office line',
       'ar': 'اتصل بنا',
       'es': 'Contáctenos',
       'fr': 'Contactez-nous',
@@ -3768,6 +3774,135 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بيت',
       'es': 'Hogar',
       'fr': 'Maison',
+    },
+  },
+  // scan
+  {
+    'dmrr8i33': {
+      'en': 'Scan QR Code',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'zuuq0vob': {
+      'en': 'Position the QR code within the frame to scan',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'b8b37id5': {
+      'en': 'Scanning...',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    '8028kx3e': {
+      'en': 'Recent Scans',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'dmtghg3y': {
+      'en': 'Product #A12345',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'mb2zd1f7': {
+      'en': 'Scanned 2 minutes ago',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'yrhjaga9': {
+      'en': 'Upload QR Code',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+  },
+  // loginsecurebiometric
+  {
+    'uutz0tmu': {
+      'en': 'Scan Fingerprint',
+      'ar': 'تعيين بصمة الإصبع الخاصة بك',
+      'es': 'Establece tu huella digital',
+      'fr': 'Définir votre empreinte digitale',
+    },
+    '7fx4pm5v': {
+      'en': 'Please put your finger on the fingerprint scanner to unlock',
+      'ar': 'يرجى وضع إصبعك على الماسح الضوئي لبصمات الأصابع للبدء.',
+      'es': 'Coloque su dedo en el escáner de huellas digitales para comenzar.',
+      'fr':
+          'Veuillez mettre votre doigt sur le scanner d\'empreintes digitales pour commencer.',
+    },
+    'njftok0u': {
+      'en': 'Home',
+      'ar': 'بيت',
+      'es': 'Hogar',
+      'fr': 'Maison',
+    },
+    '1fhj7wxn': {
+      'en': 'You want to enable the biometric as your second security level?',
+      'ar': 'هل تريد تمكين القياسات الحيوية كمستوى الأمان الثاني لديك؟',
+      'es':
+          '¿Quiere habilitar la biometría como su segundo nivel de seguridad?',
+      'fr':
+          'Vous souhaitez activer la biométrie comme deuxième niveau de sécurité ?',
+    },
+  },
+  // Forgetpin
+  {
+    'gph7k0ks': {
+      'en': 'Enter the Security pass you set during account setup',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'g9ogdqk2': {
+      'en': 'Enter your Security pass',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'iqpb8jji': {
+      'en': 'Send ',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'mj5fi781': {
+      'en': 'Can\'t remember your pass?',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    '4bnoti5o': {
+      'en': 'continue',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+  },
+  // RequestPin
+  {
+    'rw57kflt': {
+      'en': 'Request for Pin',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'm6c0aw54': {
+      'en': 'Upload  your National identification card to verify our Identity',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    '6sw90rhz': {
+      'en': 'Request',
+      'ar': '',
+      'es': '',
+      'fr': '',
     },
   },
   // onBoardComplete_modal
@@ -3989,14 +4124,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OrderTrackItem
   {
-    'wd9vey3j': {
-      'en': 'Color',
-      'ar': 'لون',
-      'es': 'Color',
-      'fr': 'Couleur',
+    'gjoytiwi': {
+      'en': 'GHC ',
+      'ar': '\$',
+      'es': 'ps',
+      'fr': '\$',
     },
-    'shy2a38b': {
-      'en': '\$ ',
+    'h2uagotm': {
+      'en': 'GHC ',
       'ar': '\$',
       'es': 'ps',
       'fr': '\$',
@@ -4077,23 +4212,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // E-ReceiptItem
   {
-    'cf6c881o': {
-      'en': 'Color',
-      'ar': 'لون',
-      'es': 'Color',
-      'fr': 'Couleur',
-    },
     'ln03i5vy': {
       'en': 'Qty = ',
       'ar': 'الكمية =',
       'es': 'Cantidad =',
       'fr': 'Quantité =',
-    },
-    'pudj1h2p': {
-      'en': 'Size = ',
-      'ar': 'الحجم =',
-      'es': 'Tamaño =',
-      'fr': 'Taille =',
     },
   },
   // InviteItem
@@ -4232,6 +4355,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'متاح',
       'es': 'Disponible',
       'fr': 'Disponible',
+    },
+  },
+  // securityPass
+  {
+    '1n8hoye5': {
+      'en': 'Set Security Pass',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'gopo2zqd': {
+      'en': 'Create a security pass to protect your account',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'y99jew8i': {
+      'en': 'Enter Security Pass',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'zj4dqzg8': {
+      'en': 'Continue',
+      'ar': 'شائع',
+      'es': 'Popular',
+      'fr': 'Populaire',
     },
   },
   // Miscellaneous
