@@ -65,5 +65,8 @@ export '/pages/others/contact_us/contact_us_widget.dart' show ContactUsWidget;
 export '/pages/home/scan/scan_widget.dart' show ScanWidget;
 export '/pages/security/loginsecurebiometric/loginsecurebiometric_widget.dart'
     show LoginsecurebiometricWidget;
-export '/forgetpin/forgetpin_widget.dart' show ForgetpinWidget;
-export '/request_pin/request_pin_widget.dart' show RequestPinWidget;
+export '/pages/security/forgetpin/forgetpin_widget.dart' show ForgetpinWidget;
+export '/pages/security/request_pin/request_pin_widget.dart'
+    show RequestPinWidget;
+export '/pages/security/waiting_request/waiting_request_widget.dart'
+    show WaitingRequestWidget;

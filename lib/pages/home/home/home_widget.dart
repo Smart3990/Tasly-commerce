@@ -1347,9 +1347,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           ],
                                           gradient: LinearGradient(
                                             colors: [
+                                              Color(0xFF624A1B),
                                               FlutterFlowTheme.of(context)
-                                                  .primary,
-                                              Color(0xFF231693)
+                                                  .primary
                                             ],
                                             stops: [0.0, 1.0],
                                             begin:

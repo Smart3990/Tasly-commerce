@@ -343,10 +343,16 @@ class FFAppState extends ChangeNotifier {
     _isDistributor = value;
   }
 
-  String _securityPass = '';
-  String get securityPass => _securityPass;
-  set securityPass(String value) {
+  bool _securityPass = false;
+  bool get securityPass => _securityPass;
+  set securityPass(bool value) {
     _securityPass = value;
+  }
+
+  String _uploadPhoto = '';
+  String get uploadPhoto => _uploadPhoto;
+  set uploadPhoto(String value) {
+    _uploadPhoto = value;
   }
 
   final _allProductsManager = FutureRequestManager<List<ProductRecord>>();

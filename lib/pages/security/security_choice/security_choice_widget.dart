@@ -92,8 +92,7 @@ class _SecurityChoiceWidgetState extends State<SecurityChoiceWidget> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     if (valueOrDefault<bool>(
-                                        currentUserDocument?.isDistributor,
-                                        false))
+                                        currentUserDocument?.isPro, false))
                                       Expanded(
                                         child: AuthUserStreamWidget(
                                           builder: (context) => Text(
@@ -115,6 +114,35 @@ class _SecurityChoiceWidgetState extends State<SecurityChoiceWidget> {
                                           ),
                                         ),
                                       ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 44.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '3pv1cq7c' /* Set up your Pin Ccode */,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        maxLines: 3,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Urbanist',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -220,8 +248,7 @@ class _SecurityChoiceWidgetState extends State<SecurityChoiceWidget> {
                                       ),
                                     ),
                                     if (valueOrDefault<bool>(
-                                        currentUserDocument?.isDistributor,
-                                        false))
+                                        currentUserDocument?.isPro, false))
                                       Expanded(
                                         child: AuthUserStreamWidget(
                                           builder: (context) => InkWell(

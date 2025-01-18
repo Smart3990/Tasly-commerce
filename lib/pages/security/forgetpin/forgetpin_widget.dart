@@ -182,55 +182,73 @@ class _ForgetpinWidgetState extends State<ForgetpinWidget> {
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  if (_model.textController.text ==
-                                      valueOrDefault(
-                                          currentUserDocument?.securityPass,
-                                          '')) {
-                                    context.pushNamed('pinCodeSet');
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Incorrect Securiry pass ',
-                                          style: GoogleFonts.getFont(
-                                            'Roboto',
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiary,
+                              if (_model.textController.text ==
+                                  valueOrDefault(
+                                      currentUserDocument?.securityPass, ''))
+                                AuthUserStreamWidget(
+                                  builder: (context) => FFButtonWidget(
+                                    onPressed: () async {
+                                      if (_model.textController.text ==
+                                          valueOrDefault(
+                                              currentUserDocument?.securityPass,
+                                              '')) {
+                                        FFAppState().securityPass = true;
+                                        safeSetState(() {});
+
+                                        context.goNamed('pinCodeSet');
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Wrong! Enter the correct  Pin.',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 2000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryText,
                                           ),
-                                        ),
-                                        duration: Duration(milliseconds: 4000),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                      ),
-                                    );
-                                  }
-                                },
-                                text: FFLocalizations.of(context).getText(
-                                  'iqpb8jji' /* Send  */,
+                                        );
+                                      }
+                                    },
+                                    text: FFLocalizations.of(context).getText(
+                                      'iqpb8jji' /* Send  */,
+                                    ),
+                                    options: FFButtonOptions(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
+                                      height: 58.0,
+                                      padding: EdgeInsets.all(8.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
                                 ),
-                                options: FFButtonOptions(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height: 58.0,
-                                  padding: EdgeInsets.all(8.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
                               InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,

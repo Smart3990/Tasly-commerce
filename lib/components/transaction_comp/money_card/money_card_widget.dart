@@ -68,6 +68,23 @@ class _MoneyCardWidgetState extends State<MoneyCardWidget> {
         height: 200.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryText,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: Image.network(
+              'https://t4.ftcdn.net/jpg/08/30/47/83/360_F_830478336_luaPfqjqq473mQH80jwW4flpYaAEdazb.jpg',
+            ).image,
+          ),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 4.0,
+              color: Color(0x33191616),
+              offset: Offset(
+                0.0,
+                2.0,
+              ),
+              spreadRadius: 0.0,
+            )
+          ],
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Container(
@@ -182,8 +199,7 @@ class _MoneyCardWidgetState extends State<MoneyCardWidget> {
                                       .labelMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .pageViewDots,
+                                        color: Color(0xFF526C76),
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -193,8 +209,7 @@ class _MoneyCardWidgetState extends State<MoneyCardWidget> {
                                       .labelMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .pageViewDots,
+                                        color: Color(0xFF526C76),
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -246,7 +261,7 @@ class _MoneyCardWidgetState extends State<MoneyCardWidget> {
                                         widget!.balance,
                                         formatType: FormatType.decimal,
                                         decimalType: DecimalType.automatic,
-                                        currency: '\$',
+                                        currency: 'GHC ',
                                       ).maybeHandleOverflow(
                                         maxChars: 40,
                                       ),

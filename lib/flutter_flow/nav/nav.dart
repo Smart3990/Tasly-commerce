@@ -451,6 +451,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'RequestPin',
           path: '/requestPin',
           builder: (context, params) => RequestPinWidget(),
+        ),
+        FFRoute(
+          name: 'waitingRequest',
+          path: '/waitingRequest',
+          builder: (context, params) => WaitingRequestWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

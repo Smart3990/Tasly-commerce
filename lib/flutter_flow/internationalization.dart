@@ -2138,6 +2138,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr':
           'Si vous le souhaitez, vous pouvez définir un autre niveau de sécurité, en choisir un ou ignorer',
     },
+    '3pv1cq7c': {
+      'en': 'Set up your Pin Ccode',
+      'ar':
+          'إذا أردت، يمكنك تعيين طبقة أخرى من الأمان، اختر طبقة واحدة أو تخطيها',
+      'es':
+          'Si lo desea, puede establecer otra capa de seguridad, elija una u omita',
+      'fr':
+          'Si vous le souhaitez, vous pouvez définir un autre niveau de sécurité, en choisir un ou ignorer',
+    },
     'edlk8l7s': {
       'en': 'Pin code',
       'ar': 'رمز التعريف الشخصي',
@@ -2243,66 +2252,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // developer
   {
-    'nse61f87': {
-      'en': 'www.kiyutech.com',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'dpawytxp': {
-      'en': 'Copy',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'vbzpnah2': {
-      'en': 'cv',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'shjvuahl': {
-      'en': 'LinkedIn',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'qzt2ihiv': {
-      'en': 'X',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'dmmxminf': {
-      'en': 'example.info@example.com',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    '6s726gu8': {
-      'en': 'Copy',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'cup099vu': {
-      'en': 'CV',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'frhug5fc': {
-      'en': 'LinkedIn',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'fuyqmbat': {
-      'en': 'X',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
     'm1013u4b': {
       'en':
           'Innovative Solutions in Web & Mobile Development for Seamless User Experiences',
@@ -2807,6 +2756,36 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'ht7c4bsb': {
       'en':
           'Tell us all about your project, or at least enough to make us say, “Wow, let’s build this!”',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'yn4lttza': {
+      'en': 'www.kiyutech.com',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'j9qkkrfj': {
+      'en': 'Copy',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'xnspgujj': {
+      'en': 'cv',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'v8zha230': {
+      'en': 'LinkedIn',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'tvzlng5h': {
+      'en': 'X',
       'ar': '',
       'es': '',
       'fr': '',
@@ -3796,26 +3775,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
       'fr': '',
     },
-    '8028kx3e': {
-      'en': 'Recent Scans',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'dmtghg3y': {
-      'en': 'Product #A12345',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'mb2zd1f7': {
-      'en': 'Scanned 2 minutes ago',
-      'ar': '',
-      'es': '',
-      'fr': '',
-    },
-    'yrhjaga9': {
-      'en': 'Upload QR Code',
+    '5k6xow9g': {
+      'en': 'Cancel',
       'ar': '',
       'es': '',
       'fr': '',
@@ -3899,7 +3860,29 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': '',
     },
     '6sw90rhz': {
+      'en': 'upload',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'oxitaxet': {
       'en': 'Request',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+  },
+  // waitingRequest
+  {
+    'uk6fs5ih': {
+      'en': 'Request received',
+      'ar': '',
+      'es': '',
+      'fr': '',
+    },
+    'np03m67b': {
+      'en':
+          'Your request has  been received and is under  verification. This might take up to 5 working days. ',
       'ar': '',
       'es': '',
       'fr': '',
@@ -4366,7 +4349,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': '',
     },
     'gopo2zqd': {
-      'en': 'Create a security pass to protect your account',
+      'en':
+          'Create a security pass known to you alone to recover your account  after forgeting your pin',
       'ar': '',
       'es': '',
       'fr': '',
@@ -4377,7 +4361,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
       'fr': '',
     },
-    'zj4dqzg8': {
+    '8obmfcl0': {
       'en': 'Continue',
       'ar': 'شائع',
       'es': 'Popular',

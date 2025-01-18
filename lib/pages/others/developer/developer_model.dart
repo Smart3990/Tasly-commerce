@@ -1,3 +1,4 @@
+import '/components/other_component/header/header_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -54,6 +55,8 @@ class DeveloperModel extends FlutterFlowModel<DeveloperWidget> {
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
+  // Model for Header component.
+  late HeaderModel headerModel;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController3;
   int carouselCurrentIndex3 = 1;
@@ -123,7 +126,9 @@ class DeveloperModel extends FlutterFlowModel<DeveloperWidget> {
   String? Function(BuildContext, String?)? textController9Validator;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    headerModel = createModel(context, () => HeaderModel());
+  }
 
   @override
   void dispose() {
@@ -141,6 +146,7 @@ class DeveloperModel extends FlutterFlowModel<DeveloperWidget> {
     textFieldFocusNode3?.dispose();
     textController3?.dispose();
 
+    headerModel.dispose();
     expandableExpandableController6.dispose();
     expandableExpandableController7.dispose();
     expandableExpandableController8.dispose();

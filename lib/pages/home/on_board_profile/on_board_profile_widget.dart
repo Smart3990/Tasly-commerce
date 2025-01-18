@@ -4,7 +4,7 @@ import '/components/other_component/avatar_with_update/avatar_with_update_widget
 import '/components/other_component/birthday_update/birthday_update_widget.dart';
 import '/components/other_component/header/header_widget.dart';
 import '/components/other_component/on_board_complete_modal/on_board_complete_modal_widget.dart';
-import '/components/security_pass_widget.dart';
+import '/components/security/security_pass/security_pass_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -937,10 +937,6 @@ class _OnBoardProfileWidgetState extends State<OnBoardProfileWidget> {
                                       .enable) {
                                     context.goNamed('SecurityChoice');
                                   } else {
-                                    await currentUserReference!
-                                        .update(createUsersRecordData(
-                                      onboardingFinished: true,
-                                    ));
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
@@ -962,9 +958,13 @@ class _OnBoardProfileWidgetState extends State<OnBoardProfileWidget> {
                                       },
                                     ).then((value) => safeSetState(() {}));
 
-                                    FFAppState().securityPass =
-                                        FFAppState().securityPass;
+                                    FFAppState().securityPass = true;
                                     safeSetState(() {});
+
+                                    await currentUserReference!
+                                        .update(createUsersRecordData(
+                                      onboardingFinished: true,
+                                    ));
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
