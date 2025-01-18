@@ -1444,18 +1444,18 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                                   text: FFLocalizations.of(
                                                           context)
                                                       .getText(
-                                                    '1ra0ur6u' /* Continue to Payment */,
+                                                    'i0dy5npu' /* Continue to Payment */,
                                                   ),
                                                   icon: Icon(
-                                                    FFIcons.karrowRight,
-                                                    size: 20.0,
+                                                    Icons.arrow_right_alt_sharp,
+                                                    size: 16.0,
                                                   ),
                                                   options: FFButtonOptions(
                                                     height: 58.0,
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(20.0, 0.0,
-                                                                20.0, 0.0),
+                                                            .fromSTEB(20.0, 8.0,
+                                                                20.0, 8.0),
                                                     iconPadding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,

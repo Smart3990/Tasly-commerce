@@ -146,7 +146,7 @@ class _ScanWidgetState extends State<ScanWidget> {
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'b8b37id5' /* Scanning... */,
+                                      'b8b37id5' /* Scanning */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -157,6 +157,45 @@ class _ScanWidgetState extends State<ScanWidget> {
                                           letterSpacing: 0.0,
                                         ),
                                   ),
+                                ].divide(SizedBox(height: 16.0)),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(16.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 24.0, 24.0, 24.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SelectionArea(
+                                      child: Text(
+                                    valueOrDefault<String>(
+                                      _model.scan,
+                                      '...',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  )),
                                 ].divide(SizedBox(height: 16.0)),
                               ),
                             ),

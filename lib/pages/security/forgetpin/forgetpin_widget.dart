@@ -182,28 +182,32 @@ class _ForgetpinWidgetState extends State<ForgetpinWidget> {
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              if (_model.textController.text ==
-                                  valueOrDefault(
-                                      currentUserDocument?.securityPass, ''))
-                                AuthUserStreamWidget(
-                                  builder: (context) => FFButtonWidget(
-                                    onPressed: () async {
-                                      if (_model.textController.text ==
-                                          valueOrDefault(
-                                              currentUserDocument?.securityPass,
-                                              '')) {
-                                        FFAppState().securityPass = true;
-                                        safeSetState(() {});
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 30.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: (_model.textController.text ==
+                                              null ||
+                                          _model.textController.text == '')
+                                      ? null
+                                      : () async {
+                                          if (_model.textController.text ==
+                                              valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.securityPass,
+                                                  '')) {
+                                            FFAppState().securityPass = true;
+                                            safeSetState(() {});
 
-                                        context.goNamed('pinCodeSet');
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Wrong! Enter the correct  Pin.',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
+                                            context.goNamed('pinCodeSet');
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Wrong! Enter the correct  Pin.',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodySmall
                                                       .override(
                                                         fontFamily: 'Inter',
@@ -213,42 +217,46 @@ class _ForgetpinWidgetState extends State<ForgetpinWidget> {
                                                                 .error,
                                                         letterSpacing: 0.0,
                                                       ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 2000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    text: FFLocalizations.of(context).getText(
-                                      'iqpb8jji' /* Send  */,
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 2000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                  text: FFLocalizations.of(context).getText(
+                                    'g3zcplvv' /* Continue */,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        40.0, 23.0, 40.0, 23.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    elevation: 10.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
                                     ),
-                                    options: FFButtonOptions(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      height: 58.0,
-                                      padding: EdgeInsets.all(8.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 0.0,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    disabledColor: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                   ),
                                 ),
+                              ),
                               InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,

@@ -123,7 +123,10 @@ class _RequestPinWidgetState extends State<RequestPinWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.network(
-                                    FFAppState().uploadPhoto,
+                                    valueOrDefault<String>(
+                                      FFAppState().uploadPhoto,
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRLynGuRfxgxbM1SdTqhYWm39PHEpWu96Xg&s',
+                                    ),
                                     width: 250.0,
                                     fit: BoxFit.contain,
                                   ),

@@ -445,6 +445,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Forgetpin',
           path: '/forgetpin',
+          requireAuth: true,
           builder: (context, params) => ForgetpinWidget(),
         ),
         FFRoute(

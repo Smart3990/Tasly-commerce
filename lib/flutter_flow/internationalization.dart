@@ -984,11 +984,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Total',
       'fr': 'Total',
     },
-    '1ra0ur6u': {
+    'i0dy5npu': {
       'en': 'Continue to Payment',
-      'ar': 'الاستمرار في الدفع',
-      'es': 'Continuar con el pago',
-      'fr': 'Continuer vers le paiement',
+      'ar': 'شائع',
+      'es': 'Popular',
+      'fr': 'Populaire',
     },
     'godk3op1': {
       'en': 'Continue to Payment',
@@ -3770,7 +3770,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': '',
     },
     'b8b37id5': {
-      'en': 'Scanning...',
+      'en': 'Scanning',
       'ar': '',
       'es': '',
       'fr': '',
@@ -3826,11 +3826,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
       'fr': '',
     },
-    'iqpb8jji': {
-      'en': 'Send ',
-      'ar': '',
-      'es': '',
-      'fr': '',
+    'g3zcplvv': {
+      'en': 'Continue',
+      'ar': 'شائع',
+      'es': 'Popular',
+      'fr': 'Populaire',
     },
     'mj5fi781': {
       'en': 'Can\'t remember your pass?',
