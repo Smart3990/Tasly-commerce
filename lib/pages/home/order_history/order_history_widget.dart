@@ -108,12 +108,12 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                   tabs: [
                                     Tab(
                                       text: FFLocalizations.of(context).getText(
-                                        'irz85r12' /* Ongoing */,
+                                        'u9nwx0i4' /* Ongoing */,
                                       ),
                                     ),
                                     Tab(
                                       text: FFLocalizations.of(context).getText(
-                                        'kn1523mk' /* Completed */,
+                                        'b291h40e' /* Completed */,
                                       ),
                                     ),
                                   ],
@@ -319,7 +319,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
 
                                                                   return OrderOngoingItemWidget(
                                                                     key: Key(
-                                                                        'Keypn4_${productIndex}_of_${product.length}'),
+                                                                        'Keyyan_${productIndex}_of_${product.length}'),
                                                                     product:
                                                                         orderOngoingItemProductRecord,
                                                                     price: productItem
@@ -369,7 +369,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                                                       DecimalType
                                                                           .automatic,
                                                                   currency:
-                                                                      '\$',
+                                                                      'GHC ',
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -385,7 +385,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                                                 FFLocalizations.of(
                                                                         context)
                                                                     .getText(
-                                                                  'm3zjlodp' /*  |  */,
+                                                                  'dev6hilz' /*  |  */,
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -480,7 +480,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                                               text: FFLocalizations
                                                                       .of(context)
                                                                   .getText(
-                                                                'gujt0dxc' /* Track Order */,
+                                                                'svpsvjev' /* Track Order */,
                                                               ),
                                                               options:
                                                                   FFButtonOptions(
@@ -739,13 +739,16 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
 
                                                                   return OrderOngoingItemWidget(
                                                                     key: Key(
-                                                                        'Keyfrg_${productIndex}_of_${product.length}'),
+                                                                        'Keyuyr_${productIndex}_of_${product.length}'),
                                                                     product:
                                                                         orderOngoingItemProductRecord,
                                                                     price: productItem
                                                                         .price,
                                                                     qty: productItem
                                                                         .count,
+                                                                    distributorPrice:
+                                                                        productItem
+                                                                            .distributorPrice,
                                                                   );
                                                                 },
                                                               ),
@@ -786,7 +789,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                                                       DecimalType
                                                                           .automatic,
                                                                   currency:
-                                                                      '\$',
+                                                                      'GHC ',
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -802,7 +805,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                                                 FFLocalizations.of(
                                                                         context)
                                                                     .getText(
-                                                                  'ih5vjybb' /*  |  */,
+                                                                  '70fpbnf3' /*  |  */,
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -897,7 +900,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                                               text: FFLocalizations
                                                                       .of(context)
                                                                   .getText(
-                                                                'oqduju2y' /* E-Receipt */,
+                                                                '6geb8vxn' /* E-Receipt */,
                                                               ),
                                                               options:
                                                                   FFButtonOptions(

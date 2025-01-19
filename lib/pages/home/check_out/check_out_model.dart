@@ -48,6 +48,10 @@ class CheckOutModel extends FlutterFlowModel<CheckOutWidget> {
   OrderRecord? updatedOrder1;
   // Stores action output result for [Backend Call - Read Document] action in Buttonregular widget.
   OrderRecord? updatedOrderFinal;
+  // Stores action output result for [Backend Call - Read Document] action in Buttonregulartemp widget.
+  OrderRecord? updatedOrder10;
+  // Stores action output result for [Backend Call - Read Document] action in Buttonregulartemp widget.
+  OrderRecord? updatedOrderFinal10;
 
   @override
   void initState(BuildContext context) {

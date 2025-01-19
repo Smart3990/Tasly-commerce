@@ -19,6 +19,8 @@ class NavBarModel extends FlutterFlowModel<NavBarWidget> {
   late NaBarItemModel naBarItemModel2;
   // Model for NaBarItem component.
   late NaBarItemModel naBarItemModel3;
+  // Model for ordersdis.
+  late NaBarItemModel ordersdisModel;
   // Model for orders.
   late NaBarItemModel ordersModel;
   // Model for profil.
@@ -29,6 +31,7 @@ class NavBarModel extends FlutterFlowModel<NavBarWidget> {
     naBarItemModel1 = createModel(context, () => NaBarItemModel());
     naBarItemModel2 = createModel(context, () => NaBarItemModel());
     naBarItemModel3 = createModel(context, () => NaBarItemModel());
+    ordersdisModel = createModel(context, () => NaBarItemModel());
     ordersModel = createModel(context, () => NaBarItemModel());
     profilModel = createModel(context, () => NaBarItemModel());
   }
@@ -38,6 +41,7 @@ class NavBarModel extends FlutterFlowModel<NavBarWidget> {
     naBarItemModel1.dispose();
     naBarItemModel2.dispose();
     naBarItemModel3.dispose();
+    ordersdisModel.dispose();
     ordersModel.dispose();
     profilModel.dispose();
   }

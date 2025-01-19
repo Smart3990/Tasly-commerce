@@ -58,7 +58,7 @@ class _SecurityPassWidgetState extends State<SecurityPassWidget> {
         children: [
           Spacer(),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(44.0, 0.0, 44.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -173,56 +173,52 @@ class _SecurityPassWidgetState extends State<SecurityPassWidget> {
                       validator: _model.securitypassfieldTextControllerValidator
                           .asValidator(context),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await currentUserReference!
-                              .update(createUsersRecordData(
-                            securityPass:
-                                _model.securitypassfieldTextController.text,
-                          ));
-                          FFAppState().securityPass = true;
-                          safeSetState(() {});
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: OnBoardCompleteModalWidget(),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          '8obmfcl0' /* Continue */,
+                    FFButtonWidget(
+                      onPressed: () async {
+                        await currentUserReference!
+                            .update(createUsersRecordData(
+                          securityPass:
+                              _model.securitypassfieldTextController.text,
+                        ));
+                        FFAppState().securityPass = true;
+                        safeSetState(() {});
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: OnBoardCompleteModalWidget(),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
+                      },
+                      text: FFLocalizations.of(context).getText(
+                        '8obmfcl0' /* Continue */,
+                      ),
+                      options: FFButtonOptions(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            90.0, 30.0, 90.0, 30.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  fontSize: 18.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                        elevation: 10.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
                         ),
-                        options: FFButtonOptions(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              90.0, 30.0, 90.0, 30.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                          elevation: 10.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ].divide(SizedBox(height: 16.0)),

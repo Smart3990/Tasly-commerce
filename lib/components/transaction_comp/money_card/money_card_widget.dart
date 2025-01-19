@@ -217,10 +217,18 @@ class _MoneyCardWidgetState extends State<MoneyCardWidget> {
                             ),
                           ],
                         ),
-                        Icon(
-                          FFIcons.kcreditCard,
-                          color: FlutterFlowTheme.of(context).grayTextMiddle,
-                          size: 54.0,
+                        Container(
+                          width: 50.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: Color(0x41433B3B),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: Image.asset(
+                                'assets/images/Tasly_Healthcare_Store-selar.co-20231230063619-removebg-preview.png',
+                              ).image,
+                            ),
+                          ),
                         ),
                       ],
                     ),

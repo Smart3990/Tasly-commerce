@@ -996,6 +996,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Continuar con el pago',
       'fr': 'Continuer vers le paiement',
     },
+    'qilqu28p': {
+      'en': 'Continue to Payment temp',
+      'ar': 'الاستمرار في الدفع',
+      'es': 'Continuar con el pago',
+      'fr': 'Continuer vers le paiement',
+    },
     'edogkbdu': {
       'en': 'Home',
       'ar': 'بيت',
@@ -1069,37 +1075,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Mis ordenes',
       'fr': 'Mes commandes',
     },
-    'irz85r12': {
+    'u9nwx0i4': {
       'en': 'Ongoing',
       'ar': 'جاري التنفيذ',
       'es': 'En curso',
       'fr': 'En cours',
     },
-    'm3zjlodp': {
+    'dev6hilz': {
       'en': ' | ',
       'ar': '|',
       'es': '|',
       'fr': '|',
     },
-    'gujt0dxc': {
+    'svpsvjev': {
       'en': 'Track Order',
       'ar': 'ترتيب المسار',
       'es': 'Orden de pista',
       'fr': 'Suivi de commande',
     },
-    'kn1523mk': {
+    'b291h40e': {
       'en': 'Completed',
       'ar': 'مكتمل',
       'es': 'Terminado',
       'fr': 'Complété',
     },
-    'ih5vjybb': {
+    '70fpbnf3': {
       'en': ' | ',
       'ar': '|',
       'es': '|',
       'fr': '|',
     },
-    'oqduju2y': {
+    '6geb8vxn': {
       'en': 'E-Receipt',
       'ar': 'الإيصال الإلكتروني',
       'es': 'Recibo electrónico',
@@ -1891,6 +1897,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Autenticador de Google',
       'fr': 'Authentificateur Google',
     },
+    'v1da6dsd': {
+      'en': 'Security pass',
+      'ar': 'أداة مصادقة جوجل',
+      'es': 'Autenticador de Google',
+      'fr': 'Authentificateur Google',
+    },
     'srv17ln0': {
       'en': 'Change Pin code',
       'ar': 'تغيير الرمز السري',
@@ -2159,13 +2171,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Establece un número de 4 dígitos como tu código PIN',
       'fr': 'Définissez un numéro à 4 chiffres comme code PIN',
     },
-    'b4t3pggm': {
+    '0j1uj0sg': {
       'en': 'Biometrics',
       'ar': 'القياسات الحيوية',
       'es': 'Biometría',
       'fr': 'Biométrie',
     },
-    '3pfvop1f': {
+    '8py4b12r': {
       'en': 'We use your device biometric hardware',
       'ar': 'نحن نستخدم الأجهزة البيومترية الخاصة بجهازك',
       'es': 'Utilizamos el hardware biométrico de tu dispositivo',
@@ -3886,6 +3898,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
       'es': '',
       'fr': '',
+    },
+  },
+  // addcard
+  {
+    'inb7kc21': {
+      'en': 'Add card',
+      'ar': 'طرق الدفع',
+      'es': 'Métodos de pago',
+      'fr': 'méthodes de payement',
+    },
+    'jjfcwgeq': {
+      'en': 'Add Card',
+      'ar': 'أداة مصادقة جوجل',
+      'es': 'Autenticador de Google',
+      'fr': 'Authentificateur Google',
+    },
+    '8gtgro9i': {
+      'en': 'Home',
+      'ar': 'بيت',
+      'es': 'Hogar',
+      'fr': 'Maison',
     },
   },
   // onBoardComplete_modal

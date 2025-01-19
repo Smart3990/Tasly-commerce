@@ -70,3 +70,4 @@ export '/pages/security/request_pin/request_pin_widget.dart'
     show RequestPinWidget;
 export '/pages/security/waiting_request/waiting_request_widget.dart'
     show WaitingRequestWidget;
+export '/pages/payment/addcard/addcard_widget.dart' show AddcardWidget;

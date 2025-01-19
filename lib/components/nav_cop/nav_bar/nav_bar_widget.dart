@@ -352,32 +352,69 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                   ),
                 ),
                 Expanded(
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.goNamed('OrderHistory');
+                  child: Builder(
+                    builder: (context) {
+                      if (valueOrDefault<bool>(
+                          currentUserDocument?.isDistributor, false)) {
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.goNamed('OrderHistory');
+                          },
+                          child: wrapWithModel(
+                            model: _model.ordersdisModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: NaBarItemWidget(
+                              actiePage: widget!.activePage,
+                              currentItemName: 'Orders',
+                              unselectedIcon: Icon(
+                                Icons.document_scanner_outlined,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              selectedIcon: Icon(
+                                Icons.document_scanner,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.goNamed('OrderHistory');
+                          },
+                          child: wrapWithModel(
+                            model: _model.ordersModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: NaBarItemWidget(
+                              actiePage: widget!.activePage,
+                              currentItemName: 'Orders',
+                              unselectedIcon: Icon(
+                                Icons.document_scanner_outlined,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              selectedIcon: Icon(
+                                Icons.document_scanner,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
                     },
-                    child: wrapWithModel(
-                      model: _model.ordersModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: NaBarItemWidget(
-                        actiePage: widget!.activePage,
-                        currentItemName: 'Orders',
-                        unselectedIcon: Icon(
-                          Icons.document_scanner_outlined,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
-                        ),
-                        selectedIcon: Icon(
-                          Icons.document_scanner,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
-                        ),
-                      ),
-                    ),
                   ),
                 ),
                 Expanded(

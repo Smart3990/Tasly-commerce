@@ -94,7 +94,7 @@ class _PaymentMethodsWidgetState extends State<PaymentMethodsWidget> {
                                     FFAppState().update(() {});
                                   },
                                   child: wrapWithModel(
-                                    model: _model.paymentMethodItemModel1,
+                                    model: _model.paymentMethodItemModel,
                                     updateCallback: () => safeSetState(() {}),
                                     updateOnChange: true,
                                     child: PaymentMethodItemWidget(
@@ -105,98 +105,6 @@ class _PaymentMethodsWidgetState extends State<PaymentMethodsWidget> {
                                       isDefault: FFAppState().PaymentMethod ==
                                           'E-Wallet',
                                       showIcon: true,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 24.0, 0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      FFAppState().PaymentMethod = 'Paypal';
-                                      FFAppState().update(() {});
-                                    },
-                                    child: wrapWithModel(
-                                      model: _model.paymentMethodItemModel2,
-                                      updateCallback: () => safeSetState(() {}),
-                                      updateOnChange: true,
-                                      child: PaymentMethodItemWidget(
-                                        title: 'PayPal',
-                                        icon: Icon(
-                                          FFIcons.kbrandPaypalFilled,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                        ),
-                                        photo:
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/netron-e-com-mobile-6rhojr/assets/l7t0cjkr83or/Frame_(4).png',
-                                        isDefault: FFAppState().PaymentMethod ==
-                                            'Paypal',
-                                        showIcon: false,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 24.0, 0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      FFAppState().PaymentMethod = 'Google';
-                                      FFAppState().update(() {});
-                                    },
-                                    child: wrapWithModel(
-                                      model: _model.paymentMethodItemModel3,
-                                      updateCallback: () => safeSetState(() {}),
-                                      updateOnChange: true,
-                                      child: PaymentMethodItemWidget(
-                                        title: 'Google Play',
-                                        icon: Icon(
-                                          FFIcons.kbrandGoogle,
-                                        ),
-                                        photo:
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/netron-e-com-mobile-6rhojr/assets/ebib1njywdiq/Frame_(5).png',
-                                        isDefault: FFAppState().PaymentMethod ==
-                                            'Google',
-                                        showIcon: false,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 24.0, 0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      FFAppState().PaymentMethod = 'Apple';
-                                      FFAppState().update(() {});
-                                    },
-                                    child: wrapWithModel(
-                                      model: _model.paymentMethodItemModel4,
-                                      updateCallback: () => safeSetState(() {}),
-                                      updateOnChange: true,
-                                      child: PaymentMethodItemWidget(
-                                        title: 'Apple Pay',
-                                        icon: Icon(
-                                          FFIcons.kbrandApple,
-                                        ),
-                                        photo:
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/netron-e-com-mobile-6rhojr/assets/ho9cuo9qrdgj/Frame_(6).png',
-                                        isDefault: FFAppState().PaymentMethod ==
-                                            'Apple',
-                                        showIcon: false,
-                                      ),
                                     ),
                                   ),
                                 ),

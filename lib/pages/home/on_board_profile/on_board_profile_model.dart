@@ -4,7 +4,6 @@ import '/components/other_component/avatar_with_update/avatar_with_update_widget
 import '/components/other_component/birthday_update/birthday_update_widget.dart';
 import '/components/other_component/header/header_widget.dart';
 import '/components/other_component/on_board_complete_modal/on_board_complete_modal_widget.dart';
-import '/components/security/security_pass/security_pass_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

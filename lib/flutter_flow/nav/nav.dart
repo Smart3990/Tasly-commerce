@@ -457,6 +457,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'waitingRequest',
           path: '/waitingRequest',
           builder: (context, params) => WaitingRequestWidget(),
+        ),
+        FFRoute(
+          name: 'addcard',
+          path: '/addcard',
+          requireAuth: true,
+          builder: (context, params) => AddcardWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

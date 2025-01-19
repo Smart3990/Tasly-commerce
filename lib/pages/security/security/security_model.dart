@@ -2,6 +2,8 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/other_component/header/header_widget.dart';
+import '/components/other_component/on_board_complete_modal/on_board_complete_modal_widget.dart';
+import '/components/security/security_pass/security_pass_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
