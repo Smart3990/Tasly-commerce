@@ -1316,193 +1316,182 @@ class _CustomerSupportWidgetState extends State<CustomerSupportWidget>
                                 },
                               ).animateOnPageLoad(animationsMap[
                                   'iconButtonOnPageLoadAnimation1']!),
-                              if (valueOrDefault<bool>(
-                                  currentUserDocument?.isPro, false))
-                                AuthUserStreamWidget(
-                                  builder: (context) => FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 8.0,
-                                    borderWidth: 0.0,
-                                    buttonSize: 44.0,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    icon: Icon(
-                                      FFIcons.kmicDefault,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      size: 24.0,
-                                    ),
-                                    onPressed: () async {
-                                      _model.uplaoding = true;
-                                      safeSetState(() {});
-                                      final selectedFiles = await selectFiles(
-                                        allowedExtensions: ['mp3'],
-                                        multiFile: false,
-                                      );
-                                      if (selectedFiles != null) {
-                                        safeSetState(() =>
-                                            _model.isDataUploading2 = true);
-                                        var selectedUploadedFiles =
-                                            <FFUploadedFile>[];
+                              FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 8.0,
+                                borderWidth: 0.0,
+                                buttonSize: 44.0,
+                                fillColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                icon: Icon(
+                                  FFIcons.kmicDefault,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  _model.uplaoding = true;
+                                  safeSetState(() {});
+                                  final selectedFiles = await selectFiles(
+                                    allowedExtensions: ['mp3'],
+                                    multiFile: false,
+                                  );
+                                  if (selectedFiles != null) {
+                                    safeSetState(
+                                        () => _model.isDataUploading2 = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                        var downloadUrls = <String>[];
-                                        try {
-                                          selectedUploadedFiles = selectedFiles
-                                              .map((m) => FFUploadedFile(
-                                                    name: m.storagePath
-                                                        .split('/')
-                                                        .last,
-                                                    bytes: m.bytes,
-                                                  ))
-                                              .toList();
+                                    var downloadUrls = <String>[];
+                                    try {
+                                      selectedUploadedFiles = selectedFiles
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                              ))
+                                          .toList();
 
-                                          downloadUrls = (await Future.wait(
-                                            selectedFiles.map(
-                                              (f) async => await uploadData(
-                                                  f.storagePath, f.bytes),
-                                            ),
-                                          ))
-                                              .where((u) => u != null)
-                                              .map((u) => u!)
-                                              .toList();
-                                        } finally {
-                                          _model.isDataUploading2 = false;
-                                        }
-                                        if (selectedUploadedFiles.length ==
-                                                selectedFiles.length &&
-                                            downloadUrls.length ==
-                                                selectedFiles.length) {
-                                          safeSetState(() {
-                                            _model.uploadedLocalFile2 =
-                                                selectedUploadedFiles.first;
-                                            _model.uploadedFileUrl2 =
-                                                downloadUrls.first;
-                                          });
-                                        } else {
-                                          safeSetState(() {});
-                                          return;
-                                        }
-                                      }
-
-                                      if (_model.uploadedFileUrl2 != null &&
-                                          _model.uploadedFileUrl2 != '') {
-                                        _model.audioAttachment =
-                                            _model.uploadedFileUrl2;
-                                        _model.hasAttachment = true;
-                                        safeSetState(() {});
-                                      }
-                                      _model.uplaoding = false;
-                                      _model.attachMenu = false;
-                                      safeSetState(() {});
+                                      downloadUrls = (await Future.wait(
+                                        selectedFiles.map(
+                                          (f) async => await uploadData(
+                                              f.storagePath, f.bytes),
+                                        ),
+                                      ))
+                                          .where((u) => u != null)
+                                          .map((u) => u!)
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading2 = false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                            selectedFiles.length &&
+                                        downloadUrls.length ==
+                                            selectedFiles.length) {
                                       safeSetState(() {
-                                        _model.isDataUploading2 = false;
                                         _model.uploadedLocalFile2 =
-                                            FFUploadedFile(
-                                                bytes: Uint8List.fromList([]));
-                                        _model.uploadedFileUrl2 = '';
+                                            selectedUploadedFiles.first;
+                                        _model.uploadedFileUrl2 =
+                                            downloadUrls.first;
                                       });
-                                    },
-                                  ).animateOnPageLoad(animationsMap[
-                                      'iconButtonOnPageLoadAnimation2']!),
+                                    } else {
+                                      safeSetState(() {});
+                                      return;
+                                    }
+                                  }
+
+                                  if (_model.uploadedFileUrl2 != null &&
+                                      _model.uploadedFileUrl2 != '') {
+                                    _model.audioAttachment =
+                                        _model.uploadedFileUrl2;
+                                    _model.hasAttachment = true;
+                                    safeSetState(() {});
+                                  }
+                                  _model.uplaoding = false;
+                                  _model.attachMenu = false;
+                                  safeSetState(() {});
+                                  safeSetState(() {
+                                    _model.isDataUploading2 = false;
+                                    _model.uploadedLocalFile2 = FFUploadedFile(
+                                        bytes: Uint8List.fromList([]));
+                                    _model.uploadedFileUrl2 = '';
+                                  });
+                                },
+                              ).animateOnPageLoad(animationsMap[
+                                  'iconButtonOnPageLoadAnimation2']!),
+                              FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 8.0,
+                                borderWidth: 0.0,
+                                buttonSize: 44.0,
+                                fillColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                icon: Icon(
+                                  FFIcons.kvideo,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  size: 24.0,
                                 ),
-                              if (valueOrDefault<bool>(
-                                  currentUserDocument?.isPro, false))
-                                AuthUserStreamWidget(
-                                  builder: (context) => FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 8.0,
-                                    borderWidth: 0.0,
-                                    buttonSize: 44.0,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    icon: Icon(
-                                      FFIcons.kvideo,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      size: 24.0,
-                                    ),
-                                    onPressed: () async {
-                                      _model.uplaoding = true;
-                                      safeSetState(() {});
-                                      final selectedMedia =
-                                          await selectMediaWithSourceBottomSheet(
-                                        context: context,
-                                        allowPhoto: false,
-                                        allowVideo: true,
-                                      );
-                                      if (selectedMedia != null &&
-                                          selectedMedia.every((m) =>
-                                              validateFileFormat(
-                                                  m.storagePath, context))) {
-                                        safeSetState(() =>
-                                            _model.isDataUploading3 = true);
-                                        var selectedUploadedFiles =
-                                            <FFUploadedFile>[];
+                                onPressed: () async {
+                                  _model.uplaoding = true;
+                                  safeSetState(() {});
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    allowPhoto: false,
+                                    allowVideo: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    safeSetState(
+                                        () => _model.isDataUploading3 = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                        var downloadUrls = <String>[];
-                                        try {
-                                          selectedUploadedFiles = selectedMedia
-                                              .map((m) => FFUploadedFile(
-                                                    name: m.storagePath
-                                                        .split('/')
-                                                        .last,
-                                                    bytes: m.bytes,
-                                                    height:
-                                                        m.dimensions?.height,
-                                                    width: m.dimensions?.width,
-                                                    blurHash: m.blurHash,
-                                                  ))
-                                              .toList();
+                                    var downloadUrls = <String>[];
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
 
-                                          downloadUrls = (await Future.wait(
-                                            selectedMedia.map(
-                                              (m) async => await uploadData(
-                                                  m.storagePath, m.bytes),
-                                            ),
-                                          ))
-                                              .where((u) => u != null)
-                                              .map((u) => u!)
-                                              .toList();
-                                        } finally {
-                                          _model.isDataUploading3 = false;
-                                        }
-                                        if (selectedUploadedFiles.length ==
-                                                selectedMedia.length &&
-                                            downloadUrls.length ==
-                                                selectedMedia.length) {
-                                          safeSetState(() {
-                                            _model.uploadedLocalFile3 =
-                                                selectedUploadedFiles.first;
-                                            _model.uploadedFileUrl3 =
-                                                downloadUrls.first;
-                                          });
-                                        } else {
-                                          safeSetState(() {});
-                                          return;
-                                        }
-                                      }
-
-                                      if (_model.uploadedFileUrl3 != null &&
-                                          _model.uploadedFileUrl3 != '') {
-                                        _model.videoAttachment =
-                                            _model.uploadedFileUrl3;
-                                        _model.hasAttachment = true;
-                                        safeSetState(() {});
-                                      }
-                                      _model.uplaoding = false;
-                                      _model.attachMenu = false;
-                                      safeSetState(() {});
+                                      downloadUrls = (await Future.wait(
+                                        selectedMedia.map(
+                                          (m) async => await uploadData(
+                                              m.storagePath, m.bytes),
+                                        ),
+                                      ))
+                                          .where((u) => u != null)
+                                          .map((u) => u!)
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading3 = false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                            selectedMedia.length &&
+                                        downloadUrls.length ==
+                                            selectedMedia.length) {
                                       safeSetState(() {
-                                        _model.isDataUploading3 = false;
                                         _model.uploadedLocalFile3 =
-                                            FFUploadedFile(
-                                                bytes: Uint8List.fromList([]));
-                                        _model.uploadedFileUrl3 = '';
+                                            selectedUploadedFiles.first;
+                                        _model.uploadedFileUrl3 =
+                                            downloadUrls.first;
                                       });
-                                    },
-                                  ).animateOnPageLoad(animationsMap[
-                                      'iconButtonOnPageLoadAnimation3']!),
-                                ),
+                                    } else {
+                                      safeSetState(() {});
+                                      return;
+                                    }
+                                  }
+
+                                  if (_model.uploadedFileUrl3 != null &&
+                                      _model.uploadedFileUrl3 != '') {
+                                    _model.videoAttachment =
+                                        _model.uploadedFileUrl3;
+                                    _model.hasAttachment = true;
+                                    safeSetState(() {});
+                                  }
+                                  _model.uplaoding = false;
+                                  _model.attachMenu = false;
+                                  safeSetState(() {});
+                                  safeSetState(() {
+                                    _model.isDataUploading3 = false;
+                                    _model.uploadedLocalFile3 = FFUploadedFile(
+                                        bytes: Uint8List.fromList([]));
+                                    _model.uploadedFileUrl3 = '';
+                                  });
+                                },
+                              ).animateOnPageLoad(animationsMap[
+                                  'iconButtonOnPageLoadAnimation3']!),
                             ].divide(SizedBox(height: 8.0)),
                           ),
                         ),

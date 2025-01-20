@@ -261,7 +261,7 @@ class _TrackOrderWidgetState extends State<TrackOrderWidget> {
                                                             FormatType.decimal,
                                                         decimalType: DecimalType
                                                             .automatic,
-                                                        currency: '\$',
+                                                        currency: 'GHC ',
                                                       ),
                                                       style: FlutterFlowTheme
                                                               .of(context)

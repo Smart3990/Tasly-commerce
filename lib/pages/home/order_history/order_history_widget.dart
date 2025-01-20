@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -140,21 +141,31 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                     KeepAliveWidgetWrapper(
                                       builder: (context) =>
                                           FutureBuilder<List<OrderRecord>>(
-                                        future: queryOrderRecordOnce(
-                                          queryBuilder: (orderRecord) =>
-                                              orderRecord
-                                                  .where(
-                                                    'status',
-                                                    isEqualTo: 'Paid',
-                                                  )
-                                                  .where(
-                                                    'user_ref',
-                                                    isEqualTo:
-                                                        currentUserReference,
-                                                  )
-                                                  .orderBy('date',
-                                                      descending: true),
-                                        ),
+                                        future:
+                                            (_model.firestoreRequestCompleter2 ??=
+                                                    Completer<
+                                                        List<OrderRecord>>()
+                                                      ..complete(
+                                                          queryOrderRecordOnce(
+                                                        queryBuilder:
+                                                            (orderRecord) =>
+                                                                orderRecord
+                                                                    .where(
+                                                                      'status',
+                                                                      isEqualTo:
+                                                                          'Paid',
+                                                                    )
+                                                                    .where(
+                                                                      'user_ref',
+                                                                      isEqualTo:
+                                                                          currentUserReference,
+                                                                    )
+                                                                    .orderBy(
+                                                                        'date',
+                                                                        descending:
+                                                                            true),
+                                                      )))
+                                                .future,
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
@@ -185,375 +196,386 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                             );
                                           }
 
-                                          return ListView.separated(
-                                            padding: EdgeInsets.fromLTRB(
-                                              0,
-                                              24.0,
-                                              0,
-                                              48.0,
-                                            ),
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                listViewOrderRecordList.length,
-                                            separatorBuilder: (_, __) =>
-                                                SizedBox(height: 24.0),
-                                            itemBuilder:
-                                                (context, listViewIndex) {
-                                              final listViewOrderRecord =
-                                                  listViewOrderRecordList[
-                                                      listViewIndex];
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    'E-Receipt',
-                                                    queryParameters: {
-                                                      'order': serializeParam(
-                                                        listViewOrderRecord,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'order':
+                                          return RefreshIndicator(
+                                            onRefresh: () async {
+                                              safeSetState(() => _model
+                                                      .firestoreRequestCompleter2 =
+                                                  null);
+                                              await _model
+                                                  .waitForFirestoreRequestCompleted2();
+                                            },
+                                            child: ListView.separated(
+                                              padding: EdgeInsets.fromLTRB(
+                                                0,
+                                                24.0,
+                                                0,
+                                                48.0,
+                                              ),
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: listViewOrderRecordList
+                                                  .length,
+                                              separatorBuilder: (_, __) =>
+                                                  SizedBox(height: 24.0),
+                                              itemBuilder:
+                                                  (context, listViewIndex) {
+                                                final listViewOrderRecord =
+                                                    listViewOrderRecordList[
+                                                        listViewIndex];
+                                                return InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'E-Receipt',
+                                                      queryParameters: {
+                                                        'order': serializeParam(
                                                           listViewOrderRecord,
-                                                    },
-                                                  );
-                                                },
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  0.0,
-                                                                  20.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Flexible(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          16.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Order #${listViewOrderRecord.reference.id}',
-                                                                maxLines: 1,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Builder(
-                                                      builder: (context) {
-                                                        final product =
-                                                            listViewOrderRecord
-                                                                .products
-                                                                .toList();
-
-                                                        return Column(
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'order':
+                                                            listViewOrderRecord,
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    20.0,
+                                                                    0.0,
+                                                                    20.0,
+                                                                    0.0),
+                                                        child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
-                                                          children: List.generate(
-                                                              product.length,
-                                                              (productIndex) {
-                                                            final productItem =
-                                                                product[
-                                                                    productIndex];
-                                                            return Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          20.0,
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0),
-                                                              child: FutureBuilder<
-                                                                  ProductRecord>(
-                                                                future: ProductRecord
-                                                                    .getDocumentOnce(
-                                                                        productItem
-                                                                            .productRef!),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return Center(
-                                                                      child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            44.0,
-                                                                        height:
-                                                                            44.0,
-                                                                        child:
-                                                                            CircularProgressIndicator(
-                                                                          valueColor:
-                                                                              AlwaysStoppedAnimation<Color>(
-                                                                            FlutterFlowTheme.of(context).primary,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-
-                                                                  final orderOngoingItemProductRecord =
-                                                                      snapshot
-                                                                          .data!;
-
-                                                                  return OrderOngoingItemWidget(
-                                                                    key: Key(
-                                                                        'Keyyan_${productIndex}_of_${product.length}'),
-                                                                    product:
-                                                                        orderOngoingItemProductRecord,
-                                                                    price: productItem
-                                                                        .price,
-                                                                    qty: productItem
-                                                                        .count,
-                                                                    distributorPrice:
-                                                                        productItem
-                                                                            .distributorPrice,
-                                                                  );
-                                                                },
-                                                              ),
-                                                            );
-                                                          }).divide(SizedBox(
-                                                              height: 8.0)),
-                                                        );
-                                                      },
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  0.0,
-                                                                  20.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                formatNumber(
-                                                                  listViewOrderRecord
-                                                                      .finalAmountPaid,
-                                                                  formatType:
-                                                                      FormatType
-                                                                          .decimal,
-                                                                  decimalType:
-                                                                      DecimalType
-                                                                          .automatic,
-                                                                  currency:
-                                                                      'GHC ',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'dev6hilz' /*  |  */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                dateTimeFormat(
-                                                                  "yMMMd",
-                                                                  listViewOrderRecord
-                                                                      .date!,
-                                                                  locale: FFLocalizations.of(
-                                                                          context)
-                                                                      .languageCode,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Text(
-                                                            listViewOrderRecord
-                                                                .status,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelSmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  0.0,
-                                                                  20.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        4.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                context
-                                                                    .pushNamed(
-                                                                  'TrackOrder',
-                                                                  queryParameters:
-                                                                      {
-                                                                    'order':
-                                                                        serializeParam(
-                                                                      listViewOrderRecord,
-                                                                      ParamType
-                                                                          .Document,
-                                                                    ),
-                                                                  }.withoutNulls,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    'order':
-                                                                        listViewOrderRecord,
-                                                                  },
-                                                                );
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'svpsvjev' /* Track Order */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        10.0,
-                                                                        8.0,
-                                                                        10.0,
-                                                                        8.0),
-                                                                iconPadding:
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Flexible(
+                                                              child: Padding(
+                                                                padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
-                                                                            0.0,
+                                                                            16.0,
                                                                             0.0),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryBackground,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                                elevation: 0.0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  width: 1.0,
+                                                                child: Text(
+                                                                  'Order #${listViewOrderRecord.reference.id}',
+                                                                  maxLines: 1,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
                                                                 ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            100.0),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Divider(
-                                                      height: 24.0,
-                                                      thickness: 1.0,
-                                                      indent: 20.0,
-                                                      endIndent: 20.0,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .grayTextMiddle,
-                                                    ),
-                                                  ].divide(
-                                                      SizedBox(height: 16.0)),
-                                                ),
-                                              );
-                                            },
+                                                      Builder(
+                                                        builder: (context) {
+                                                          final product =
+                                                              listViewOrderRecord
+                                                                  .products
+                                                                  .toList();
+
+                                                          return Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: List.generate(
+                                                                product.length,
+                                                                (productIndex) {
+                                                              final productItem =
+                                                                  product[
+                                                                      productIndex];
+                                                              return Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        20.0,
+                                                                        0.0,
+                                                                        20.0,
+                                                                        0.0),
+                                                                child: FutureBuilder<
+                                                                    ProductRecord>(
+                                                                  future: ProductRecord
+                                                                      .getDocumentOnce(
+                                                                          productItem
+                                                                              .productRef!),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              44.0,
+                                                                          height:
+                                                                              44.0,
+                                                                          child:
+                                                                              CircularProgressIndicator(
+                                                                            valueColor:
+                                                                                AlwaysStoppedAnimation<Color>(
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+
+                                                                    final orderOngoingItemProductRecord =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    return OrderOngoingItemWidget(
+                                                                      key: Key(
+                                                                          'Keyyan_${productIndex}_of_${product.length}'),
+                                                                      product:
+                                                                          orderOngoingItemProductRecord,
+                                                                      price: productItem
+                                                                          .price,
+                                                                      qty: productItem
+                                                                          .count,
+                                                                      distributorPrice:
+                                                                          productItem
+                                                                              .distributorPrice,
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              );
+                                                            }).divide(SizedBox(
+                                                                height: 8.0)),
+                                                          );
+                                                        },
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    20.0,
+                                                                    0.0,
+                                                                    20.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  formatNumber(
+                                                                    listViewOrderRecord
+                                                                        .finalAmountPaid,
+                                                                    formatType:
+                                                                        FormatType
+                                                                            .decimal,
+                                                                    decimalType:
+                                                                        DecimalType
+                                                                            .automatic,
+                                                                    currency:
+                                                                        'GHC ',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'dev6hilz' /*  |  */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  dateTimeFormat(
+                                                                    "yMMMd",
+                                                                    listViewOrderRecord
+                                                                        .date!,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Text(
+                                                              listViewOrderRecord
+                                                                  .status,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelSmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    20.0,
+                                                                    0.0,
+                                                                    20.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'TrackOrder',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'order':
+                                                                          serializeParam(
+                                                                        listViewOrderRecord,
+                                                                        ParamType
+                                                                            .Document,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                    extra: <String,
+                                                                        dynamic>{
+                                                                      'order':
+                                                                          listViewOrderRecord,
+                                                                    },
+                                                                  );
+                                                                },
+                                                                text: FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'svpsvjev' /* Track Order */,
+                                                                ),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10.0,
+                                                                          8.0,
+                                                                          10.0,
+                                                                          8.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryBackground,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    width: 1.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              100.0),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Divider(
+                                                        height: 24.0,
+                                                        thickness: 1.0,
+                                                        indent: 20.0,
+                                                        endIndent: 20.0,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .grayTextMiddle,
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(height: 16.0)),
+                                                  ),
+                                                );
+                                              },
+                                            ),
                                           );
                                         },
                                       ),
@@ -561,21 +583,31 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                     KeepAliveWidgetWrapper(
                                       builder: (context) =>
                                           FutureBuilder<List<OrderRecord>>(
-                                        future: queryOrderRecordOnce(
-                                          queryBuilder: (orderRecord) =>
-                                              orderRecord
-                                                  .where(
-                                                    'status',
-                                                    isEqualTo: 'Completed',
-                                                  )
-                                                  .where(
-                                                    'user_ref',
-                                                    isEqualTo:
-                                                        currentUserReference,
-                                                  )
-                                                  .orderBy('date',
-                                                      descending: true),
-                                        ),
+                                        future:
+                                            (_model.firestoreRequestCompleter1 ??=
+                                                    Completer<
+                                                        List<OrderRecord>>()
+                                                      ..complete(
+                                                          queryOrderRecordOnce(
+                                                        queryBuilder:
+                                                            (orderRecord) =>
+                                                                orderRecord
+                                                                    .where(
+                                                                      'status',
+                                                                      isEqualTo:
+                                                                          'Completed',
+                                                                    )
+                                                                    .where(
+                                                                      'user_ref',
+                                                                      isEqualTo:
+                                                                          currentUserReference,
+                                                                    )
+                                                                    .orderBy(
+                                                                        'date',
+                                                                        descending:
+                                                                            true),
+                                                      )))
+                                                .future,
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
@@ -605,375 +637,386 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
                                             );
                                           }
 
-                                          return ListView.separated(
-                                            padding: EdgeInsets.fromLTRB(
-                                              0,
-                                              24.0,
-                                              0,
-                                              48.0,
-                                            ),
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                listViewOrderRecordList.length,
-                                            separatorBuilder: (_, __) =>
-                                                SizedBox(height: 24.0),
-                                            itemBuilder:
-                                                (context, listViewIndex) {
-                                              final listViewOrderRecord =
-                                                  listViewOrderRecordList[
-                                                      listViewIndex];
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    'E-Receipt',
-                                                    queryParameters: {
-                                                      'order': serializeParam(
-                                                        listViewOrderRecord,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'order':
+                                          return RefreshIndicator(
+                                            onRefresh: () async {
+                                              safeSetState(() => _model
+                                                      .firestoreRequestCompleter1 =
+                                                  null);
+                                              await _model
+                                                  .waitForFirestoreRequestCompleted1();
+                                            },
+                                            child: ListView.separated(
+                                              padding: EdgeInsets.fromLTRB(
+                                                0,
+                                                24.0,
+                                                0,
+                                                48.0,
+                                              ),
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: listViewOrderRecordList
+                                                  .length,
+                                              separatorBuilder: (_, __) =>
+                                                  SizedBox(height: 24.0),
+                                              itemBuilder:
+                                                  (context, listViewIndex) {
+                                                final listViewOrderRecord =
+                                                    listViewOrderRecordList[
+                                                        listViewIndex];
+                                                return InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'E-Receipt',
+                                                      queryParameters: {
+                                                        'order': serializeParam(
                                                           listViewOrderRecord,
-                                                    },
-                                                  );
-                                                },
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  0.0,
-                                                                  20.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Flexible(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          16.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Order #${listViewOrderRecord.reference.id}',
-                                                                maxLines: 1,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Builder(
-                                                      builder: (context) {
-                                                        final product =
-                                                            listViewOrderRecord
-                                                                .products
-                                                                .toList();
-
-                                                        return Column(
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'order':
+                                                            listViewOrderRecord,
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    20.0,
+                                                                    0.0,
+                                                                    20.0,
+                                                                    0.0),
+                                                        child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
-                                                          children: List.generate(
-                                                              product.length,
-                                                              (productIndex) {
-                                                            final productItem =
-                                                                product[
-                                                                    productIndex];
-                                                            return Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          20.0,
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0),
-                                                              child: FutureBuilder<
-                                                                  ProductRecord>(
-                                                                future: ProductRecord
-                                                                    .getDocumentOnce(
-                                                                        productItem
-                                                                            .productRef!),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return Center(
-                                                                      child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            44.0,
-                                                                        height:
-                                                                            44.0,
-                                                                        child:
-                                                                            CircularProgressIndicator(
-                                                                          valueColor:
-                                                                              AlwaysStoppedAnimation<Color>(
-                                                                            FlutterFlowTheme.of(context).primary,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-
-                                                                  final orderOngoingItemProductRecord =
-                                                                      snapshot
-                                                                          .data!;
-
-                                                                  return OrderOngoingItemWidget(
-                                                                    key: Key(
-                                                                        'Keyuyr_${productIndex}_of_${product.length}'),
-                                                                    product:
-                                                                        orderOngoingItemProductRecord,
-                                                                    price: productItem
-                                                                        .price,
-                                                                    qty: productItem
-                                                                        .count,
-                                                                    distributorPrice:
-                                                                        productItem
-                                                                            .distributorPrice,
-                                                                  );
-                                                                },
-                                                              ),
-                                                            );
-                                                          }).divide(SizedBox(
-                                                              height: 8.0)),
-                                                        );
-                                                      },
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  0.0,
-                                                                  20.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                formatNumber(
-                                                                  listViewOrderRecord
-                                                                      .finalAmountPaid,
-                                                                  formatType:
-                                                                      FormatType
-                                                                          .decimal,
-                                                                  decimalType:
-                                                                      DecimalType
-                                                                          .automatic,
-                                                                  currency:
-                                                                      'GHC ',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '70fpbnf3' /*  |  */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                dateTimeFormat(
-                                                                  "yMMMd",
-                                                                  listViewOrderRecord
-                                                                      .date!,
-                                                                  locale: FFLocalizations.of(
-                                                                          context)
-                                                                      .languageCode,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Text(
-                                                            listViewOrderRecord
-                                                                .status,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelSmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  0.0,
-                                                                  20.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        4.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                context
-                                                                    .pushNamed(
-                                                                  'E-Receipt',
-                                                                  queryParameters:
-                                                                      {
-                                                                    'order':
-                                                                        serializeParam(
-                                                                      listViewOrderRecord,
-                                                                      ParamType
-                                                                          .Document,
-                                                                    ),
-                                                                  }.withoutNulls,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    'order':
-                                                                        listViewOrderRecord,
-                                                                  },
-                                                                );
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                '6geb8vxn' /* E-Receipt */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        10.0,
-                                                                        8.0,
-                                                                        10.0,
-                                                                        8.0),
-                                                                iconPadding:
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Flexible(
+                                                              child: Padding(
+                                                                padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
-                                                                            0.0,
+                                                                            16.0,
                                                                             0.0),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryBackground,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                                elevation: 0.0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  width: 1.0,
+                                                                child: Text(
+                                                                  'Order #${listViewOrderRecord.reference.id}',
+                                                                  maxLines: 1,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
                                                                 ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            100.0),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Divider(
-                                                      height: 24.0,
-                                                      thickness: 1.0,
-                                                      indent: 20.0,
-                                                      endIndent: 20.0,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .grayTextMiddle,
-                                                    ),
-                                                  ].divide(
-                                                      SizedBox(height: 16.0)),
-                                                ),
-                                              );
-                                            },
+                                                      Builder(
+                                                        builder: (context) {
+                                                          final product =
+                                                              listViewOrderRecord
+                                                                  .products
+                                                                  .toList();
+
+                                                          return Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: List.generate(
+                                                                product.length,
+                                                                (productIndex) {
+                                                              final productItem =
+                                                                  product[
+                                                                      productIndex];
+                                                              return Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        20.0,
+                                                                        0.0,
+                                                                        20.0,
+                                                                        0.0),
+                                                                child: FutureBuilder<
+                                                                    ProductRecord>(
+                                                                  future: ProductRecord
+                                                                      .getDocumentOnce(
+                                                                          productItem
+                                                                              .productRef!),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              44.0,
+                                                                          height:
+                                                                              44.0,
+                                                                          child:
+                                                                              CircularProgressIndicator(
+                                                                            valueColor:
+                                                                                AlwaysStoppedAnimation<Color>(
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+
+                                                                    final orderOngoingItemProductRecord =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    return OrderOngoingItemWidget(
+                                                                      key: Key(
+                                                                          'Keyuyr_${productIndex}_of_${product.length}'),
+                                                                      product:
+                                                                          orderOngoingItemProductRecord,
+                                                                      price: productItem
+                                                                          .price,
+                                                                      qty: productItem
+                                                                          .count,
+                                                                      distributorPrice:
+                                                                          productItem
+                                                                              .distributorPrice,
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              );
+                                                            }).divide(SizedBox(
+                                                                height: 8.0)),
+                                                          );
+                                                        },
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    20.0,
+                                                                    0.0,
+                                                                    20.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  formatNumber(
+                                                                    listViewOrderRecord
+                                                                        .finalAmountPaid,
+                                                                    formatType:
+                                                                        FormatType
+                                                                            .decimal,
+                                                                    decimalType:
+                                                                        DecimalType
+                                                                            .automatic,
+                                                                    currency:
+                                                                        'GHC ',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '70fpbnf3' /*  |  */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  dateTimeFormat(
+                                                                    "yMMMd",
+                                                                    listViewOrderRecord
+                                                                        .date!,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Text(
+                                                              listViewOrderRecord
+                                                                  .status,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelSmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    20.0,
+                                                                    0.0,
+                                                                    20.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'E-Receipt',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'order':
+                                                                          serializeParam(
+                                                                        listViewOrderRecord,
+                                                                        ParamType
+                                                                            .Document,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                    extra: <String,
+                                                                        dynamic>{
+                                                                      'order':
+                                                                          listViewOrderRecord,
+                                                                    },
+                                                                  );
+                                                                },
+                                                                text: FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  '6geb8vxn' /* E-Receipt */,
+                                                                ),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10.0,
+                                                                          8.0,
+                                                                          10.0,
+                                                                          8.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryBackground,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    width: 1.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              100.0),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Divider(
+                                                        height: 24.0,
+                                                        thickness: 1.0,
+                                                        indent: 20.0,
+                                                        endIndent: 20.0,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .grayTextMiddle,
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(height: 16.0)),
+                                                  ),
+                                                );
+                                              },
+                                            ),
                                           );
                                         },
                                       ),

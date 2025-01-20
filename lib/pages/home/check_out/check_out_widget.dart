@@ -1248,10 +1248,6 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                         List<ProductRecord>
                                             buttondisProductRecordList =
                                             snapshot.data!;
-                                        // Return an empty Container when the item does not exist.
-                                        if (snapshot.data!.isEmpty) {
-                                          return Container();
-                                        }
                                         final buttondisProductRecord =
                                             buttondisProductRecordList
                                                     .isNotEmpty
@@ -1484,10 +1480,6 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                         List<ProductRecord>
                                             buttonregularProductRecordList =
                                             snapshot.data!;
-                                        // Return an empty Container when the item does not exist.
-                                        if (snapshot.data!.isEmpty) {
-                                          return Container();
-                                        }
                                         final buttonregularProductRecord =
                                             buttonregularProductRecordList
                                                     .isNotEmpty

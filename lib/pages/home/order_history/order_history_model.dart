@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import 'dart:async';
 import 'order_history_widget.dart' show OrderHistoryWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -25,6 +26,8 @@ class OrderHistoryModel extends FlutterFlowModel<OrderHistoryWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  Completer<List<OrderRecord>>? firestoreRequestCompleter2;
+  Completer<List<OrderRecord>>? firestoreRequestCompleter1;
   // Model for NavBar component.
   late NavBarModel navBarModel;
 
@@ -39,5 +42,36 @@ class OrderHistoryModel extends FlutterFlowModel<OrderHistoryWidget> {
     headerModel.dispose();
     tabBarController?.dispose();
     navBarModel.dispose();
+  }
+
+  /// Additional helper methods.
+  Future waitForFirestoreRequestCompleted2({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = firestoreRequestCompleter2?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
+  }
+
+  Future waitForFirestoreRequestCompleted1({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = firestoreRequestCompleter1?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
   }
 }

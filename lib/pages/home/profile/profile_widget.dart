@@ -509,36 +509,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               ),
                                             ),
                                           ),
-                                          if (valueOrDefault<bool>(
-                                              currentUserDocument?.isPro,
-                                              false))
-                                            AuthUserStreamWidget(
-                                              builder: (context) => InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed('NewCard');
-                                                },
-                                                child: wrapWithModel(
-                                                  model: _model.cardModel,
-                                                  updateCallback: () =>
-                                                      safeSetState(() {}),
-                                                  child: SettingItemWidget(
-                                                    walet: FFLocalizations.of(
-                                                            context)
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed('NewCard');
+                                            },
+                                            child: wrapWithModel(
+                                              model: _model.cardModel,
+                                              updateCallback: () =>
+                                                  safeSetState(() {}),
+                                              child: SettingItemWidget(
+                                                walet:
+                                                    FFLocalizations.of(context)
                                                         .getText(
-                                                      '9k36kpvt' /* add card */,
-                                                    ),
-                                                    icon: Icon(
-                                                      Icons.add_card_outlined,
-                                                    ),
-                                                  ),
+                                                  '9k36kpvt' /* add card */,
+                                                ),
+                                                icon: Icon(
+                                                  Icons.add_card_outlined,
                                                 ),
                                               ),
                                             ),
+                                          ),
                                           InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
