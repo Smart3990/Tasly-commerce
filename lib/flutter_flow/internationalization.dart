@@ -984,20 +984,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Total',
       'fr': 'Total',
     },
-    'i0dy5npu': {
-      'en': 'Continue to Payment',
-      'ar': 'شائع',
-      'es': 'Popular',
-      'fr': 'Populaire',
-    },
-    'godk3op1': {
+    'qilqu28p': {
       'en': 'Continue to Payment',
       'ar': 'الاستمرار في الدفع',
       'es': 'Continuar con el pago',
       'fr': 'Continuer vers le paiement',
     },
-    'qilqu28p': {
-      'en': 'Continue to Payment temp',
+    'vx99lqn3': {
+      'en': 'Continue to Payment',
       'ar': 'الاستمرار في الدفع',
       'es': 'Continuar con el pago',
       'fr': 'Continuer vers le paiement',
@@ -1404,6 +1398,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'طرق الدفع',
       'es': 'Métodos de pago',
       'fr': 'méthodes de payement',
+    },
+    '9k36kpvt': {
+      'en': 'add card',
+      'ar': 'ادعو أصدقاء',
+      'es': 'Invitar a amigos',
+      'fr': 'Inviter des amis',
     },
     '4kp4sbuq': {
       'en': 'walet',
@@ -3898,27 +3898,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
       'es': '',
       'fr': '',
-    },
-  },
-  // addcard
-  {
-    'inb7kc21': {
-      'en': 'Add card',
-      'ar': 'طرق الدفع',
-      'es': 'Métodos de pago',
-      'fr': 'méthodes de payement',
-    },
-    'jjfcwgeq': {
-      'en': 'Add Card',
-      'ar': 'أداة مصادقة جوجل',
-      'es': 'Autenticador de Google',
-      'fr': 'Authentificateur Google',
-    },
-    '8gtgro9i': {
-      'en': 'Home',
-      'ar': 'بيت',
-      'es': 'Hogar',
-      'fr': 'Maison',
     },
   },
   // onBoardComplete_modal

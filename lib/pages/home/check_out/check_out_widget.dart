@@ -1202,636 +1202,6 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                               ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 10.0, 10.0),
-                                            child: Builder(
-                                              builder: (context) {
-                                                if (containerUsersRecord
-                                                    .isDistributor) {
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(20.0, 0.0,
-                                                                20.0, 0.0),
-                                                    child: StreamBuilder<
-                                                        List<ProductRecord>>(
-                                                      stream:
-                                                          queryProductRecord(
-                                                        queryBuilder:
-                                                            (productRecord) =>
-                                                                productRecord
-                                                                    .where(
-                                                          'product_information.sold',
-                                                          isEqualTo:
-                                                              valueOrDefault<
-                                                                  int>(
-                                                            checkOutOrderRecord
-                                                                .products
-                                                                .length,
-                                                            0,
-                                                          ),
-                                                        ),
-                                                        singleRecord: true,
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 44.0,
-                                                              height: 44.0,
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                valueColor:
-                                                                    AlwaysStoppedAnimation<
-                                                                        Color>(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<ProductRecord>
-                                                            buttondisProductRecordList =
-                                                            snapshot.data!;
-                                                        // Return an empty Container when the item does not exist.
-                                                        if (snapshot
-                                                            .data!.isEmpty) {
-                                                          return Container();
-                                                        }
-                                                        final buttondisProductRecord =
-                                                            buttondisProductRecordList
-                                                                    .isNotEmpty
-                                                                ? buttondisProductRecordList
-                                                                    .first
-                                                                : null;
-
-                                                        return FFButtonWidget(
-                                                          onPressed: () async {
-                                                            await Future.delayed(
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        500));
-
-                                                            await widget!
-                                                                .orderRef!
-                                                                .update({
-                                                              ...createOrderRecordData(
-                                                                paidDate:
-                                                                    getCurrentTimestamp,
-                                                                shippingMethod:
-                                                                    FFAppState()
-                                                                        .ShippingMethod,
-                                                                shippingAddress:
-                                                                    currentUserDocument
-                                                                        ?.defaultShippingAddress,
-                                                                amount: functions.sumCartPricesDIS(
-                                                                    checkOutOrderRecord
-                                                                        .products
-                                                                        .toList()),
-                                                                status:
-                                                                    'Approved',
-                                                                paymentCompleted:
-                                                                    true,
-                                                                tax: 0.0,
-                                                                paymentMethod:
-                                                                    FFAppState()
-                                                                        .PaymentMethod,
-                                                              ),
-                                                              ...mapToFirestore(
-                                                                {
-                                                                  'shipping_timeline':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    getOrderDeliveryTimelineFirestoreData(
-                                                                      createOrderDeliveryTimelineStruct(
-                                                                        date:
-                                                                            getCurrentTimestamp,
-                                                                        description:
-                                                                            'Order Started',
-                                                                        currentAddressOfPackage:
-                                                                            '-',
-                                                                        clearUnsetFields:
-                                                                            false,
-                                                                      ),
-                                                                      true,
-                                                                    )
-                                                                  ]),
-                                                                },
-                                                              ),
-                                                            });
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  'Payment Successful!',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelSmall
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        2000),
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondary,
-                                                              ),
-                                                            );
-                                                            _model.updatedOrder =
-                                                                await OrderRecord
-                                                                    .getDocumentOnce(
-                                                                        widget!
-                                                                            .orderRef!);
-                                                            if (_model
-                                                                    .promoCodeAdded !=
-                                                                null) {
-                                                              await widget!
-                                                                  .orderRef!
-                                                                  .update(
-                                                                      createOrderRecordData(
-                                                                promoCode: _model
-                                                                    .promoCodeAdded
-                                                                    ?.code,
-                                                                discountOrPromo: _model
-                                                                    .promoCodeAdded
-                                                                    ?.discount
-                                                                    ?.toDouble(),
-                                                              ));
-                                                            }
-
-                                                            await widget!
-                                                                .orderRef!
-                                                                .update(
-                                                                    createOrderRecordData(
-                                                              finalAmountPaid: (_model
-                                                                          .updatedOrder!
-                                                                          .amount -
-                                                                      ((_model.updatedOrder!.amount *
-                                                                              _model
-                                                                                  .updatedOrder!.discountOrPromo) /
-                                                                          100)) +
-                                                                  _model
-                                                                      .updatedOrder!
-                                                                      .tax,
-                                                              status:
-                                                                  OrderStatuses
-                                                                      .Paid
-                                                                      .name,
-                                                            ));
-
-                                                            await widget!
-                                                                .orderRef!
-                                                                .update(
-                                                                    createOrderRecordData(
-                                                              status: 'Paid',
-                                                            ));
-
-                                                            await currentUserDocument!
-                                                                .cartRef!
-                                                                .update({
-                                                              ...createCartRecordData(
-                                                                userRef:
-                                                                    currentUserReference,
-                                                              ),
-                                                              ...mapToFirestore(
-                                                                {
-                                                                  'products':
-                                                                      FieldValue
-                                                                          .delete(),
-                                                                },
-                                                              ),
-                                                            });
-
-                                                            await NotificationsRecord
-                                                                .collection
-                                                                .doc()
-                                                                .set(
-                                                                    createNotificationsRecordData(
-                                                                  subject:
-                                                                      'Payment Completed',
-                                                                  message:
-                                                                      'Your order now completed you can keep track of it from your order history page',
-                                                                  userRef:
-                                                                      currentUserReference,
-                                                                  seen: false,
-                                                                  date:
-                                                                      getCurrentTimestamp,
-                                                                ));
-                                                            _model.updatedOrderFinal1 =
-                                                                await OrderRecord
-                                                                    .getDocumentOnce(
-                                                                        widget!
-                                                                            .orderRef!);
-
-                                                            context.goNamed(
-                                                              'E-Receipt',
-                                                              queryParameters: {
-                                                                'order':
-                                                                    serializeParam(
-                                                                  _model
-                                                                      .updatedOrderFinal1,
-                                                                  ParamType
-                                                                      .Document,
-                                                                ),
-                                                              }.withoutNulls,
-                                                              extra: <String,
-                                                                  dynamic>{
-                                                                'order': _model
-                                                                    .updatedOrderFinal1,
-                                                              },
-                                                            );
-
-                                                            safeSetState(() {});
-                                                          },
-                                                          text: FFLocalizations
-                                                                  .of(context)
-                                                              .getText(
-                                                            'i0dy5npu' /* Continue to Payment */,
-                                                          ),
-                                                          icon: Icon(
-                                                            Icons
-                                                                .arrow_right_alt_sharp,
-                                                            size: 16.0,
-                                                          ),
-                                                          options:
-                                                              FFButtonOptions(
-                                                            width:
-                                                                double.infinity,
-                                                            height: 58.0,
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        20.0,
-                                                                        8.0,
-                                                                        20.0,
-                                                                        8.0),
-                                                            iconPadding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryBackground,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                            elevation: 10.0,
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              width: 1.0,
-                                                            ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  );
-                                                } else {
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(20.0, 0.0,
-                                                                20.0, 0.0),
-                                                    child: StreamBuilder<
-                                                        List<ProductRecord>>(
-                                                      stream:
-                                                          queryProductRecord(
-                                                        queryBuilder:
-                                                            (productRecord) =>
-                                                                productRecord
-                                                                    .where(
-                                                          'product_information.sold',
-                                                          isEqualTo:
-                                                              valueOrDefault<
-                                                                  int>(
-                                                            checkOutOrderRecord
-                                                                .products
-                                                                .length,
-                                                            0,
-                                                          ),
-                                                        ),
-                                                        singleRecord: true,
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 44.0,
-                                                              height: 44.0,
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                valueColor:
-                                                                    AlwaysStoppedAnimation<
-                                                                        Color>(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<ProductRecord>
-                                                            buttonregularProductRecordList =
-                                                            snapshot.data!;
-                                                        // Return an empty Container when the item does not exist.
-                                                        if (snapshot
-                                                            .data!.isEmpty) {
-                                                          return Container();
-                                                        }
-                                                        final buttonregularProductRecord =
-                                                            buttonregularProductRecordList
-                                                                    .isNotEmpty
-                                                                ? buttonregularProductRecordList
-                                                                    .first
-                                                                : null;
-
-                                                        return FFButtonWidget(
-                                                          onPressed: () async {
-                                                            await Future.delayed(
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        500));
-
-                                                            await widget!
-                                                                .orderRef!
-                                                                .update({
-                                                              ...createOrderRecordData(
-                                                                paidDate:
-                                                                    getCurrentTimestamp,
-                                                                shippingMethod:
-                                                                    FFAppState()
-                                                                        .ShippingMethod,
-                                                                shippingAddress:
-                                                                    currentUserDocument
-                                                                        ?.defaultShippingAddress,
-                                                                amount: functions.sumCartPrices(
-                                                                    checkOutOrderRecord
-                                                                        .products
-                                                                        .toList()),
-                                                                status:
-                                                                    'Approved',
-                                                                paymentCompleted:
-                                                                    true,
-                                                                tax: 0.0,
-                                                                paymentMethod:
-                                                                    FFAppState()
-                                                                        .PaymentMethod,
-                                                              ),
-                                                              ...mapToFirestore(
-                                                                {
-                                                                  'shipping_timeline':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    getOrderDeliveryTimelineFirestoreData(
-                                                                      createOrderDeliveryTimelineStruct(
-                                                                        date:
-                                                                            getCurrentTimestamp,
-                                                                        description:
-                                                                            'Order Started',
-                                                                        currentAddressOfPackage:
-                                                                            '-',
-                                                                        clearUnsetFields:
-                                                                            false,
-                                                                      ),
-                                                                      true,
-                                                                    )
-                                                                  ]),
-                                                                },
-                                                              ),
-                                                            });
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  'Payment Successful!',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelSmall
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        2000),
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondary,
-                                                              ),
-                                                            );
-                                                            _model.updatedOrder1 =
-                                                                await OrderRecord
-                                                                    .getDocumentOnce(
-                                                                        widget!
-                                                                            .orderRef!);
-                                                            if (_model
-                                                                    .promoCodeAdded !=
-                                                                null) {
-                                                              await widget!
-                                                                  .orderRef!
-                                                                  .update(
-                                                                      createOrderRecordData(
-                                                                promoCode: _model
-                                                                    .promoCodeAdded
-                                                                    ?.code,
-                                                                discountOrPromo: _model
-                                                                    .promoCodeAdded
-                                                                    ?.discount
-                                                                    ?.toDouble(),
-                                                              ));
-                                                            }
-
-                                                            await widget!
-                                                                .orderRef!
-                                                                .update(
-                                                                    createOrderRecordData(
-                                                              finalAmountPaid: (_model
-                                                                          .updatedOrder1!
-                                                                          .amount -
-                                                                      ((_model.updatedOrder1!.amount *
-                                                                              _model
-                                                                                  .updatedOrder1!.discountOrPromo) /
-                                                                          100)) +
-                                                                  _model
-                                                                      .updatedOrder1!
-                                                                      .tax,
-                                                              status:
-                                                                  OrderStatuses
-                                                                      .Paid
-                                                                      .name,
-                                                            ));
-
-                                                            await widget!
-                                                                .orderRef!
-                                                                .update(
-                                                                    createOrderRecordData(
-                                                              status: 'Paid',
-                                                            ));
-
-                                                            await currentUserDocument!
-                                                                .cartRef!
-                                                                .update({
-                                                              ...createCartRecordData(
-                                                                userRef:
-                                                                    currentUserReference,
-                                                              ),
-                                                              ...mapToFirestore(
-                                                                {
-                                                                  'products':
-                                                                      FieldValue
-                                                                          .delete(),
-                                                                },
-                                                              ),
-                                                            });
-
-                                                            await NotificationsRecord
-                                                                .collection
-                                                                .doc()
-                                                                .set(
-                                                                    createNotificationsRecordData(
-                                                                  subject:
-                                                                      'Payment Completed',
-                                                                  message:
-                                                                      'Your order now completed you can keep track of it from your order history page',
-                                                                  userRef:
-                                                                      currentUserReference,
-                                                                  seen: false,
-                                                                  date:
-                                                                      getCurrentTimestamp,
-                                                                ));
-                                                            _model.updatedOrderFinal =
-                                                                await OrderRecord
-                                                                    .getDocumentOnce(
-                                                                        widget!
-                                                                            .orderRef!);
-
-                                                            context.goNamed(
-                                                              'E-Receipt',
-                                                              queryParameters: {
-                                                                'order':
-                                                                    serializeParam(
-                                                                  _model
-                                                                      .updatedOrderFinal,
-                                                                  ParamType
-                                                                      .Document,
-                                                                ),
-                                                              }.withoutNulls,
-                                                              extra: <String,
-                                                                  dynamic>{
-                                                                'order': _model
-                                                                    .updatedOrderFinal,
-                                                              },
-                                                            );
-
-                                                            safeSetState(() {});
-                                                          },
-                                                          text: FFLocalizations
-                                                                  .of(context)
-                                                              .getText(
-                                                            'godk3op1' /* Continue to Payment */,
-                                                          ),
-                                                          icon: Icon(
-                                                            FFIcons.karrowRight,
-                                                            size: 20.0,
-                                                          ),
-                                                          options:
-                                                              FFButtonOptions(
-                                                            width:
-                                                                double.infinity,
-                                                            height: 58.0,
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        20.0,
-                                                                        0.0,
-                                                                        20.0,
-                                                                        0.0),
-                                                            iconPadding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryBackground,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                            elevation: 10.0,
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              width: 1.0,
-                                                            ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -1839,168 +1209,480 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 20.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  await Future.delayed(
-                                      const Duration(milliseconds: 500));
-
-                                  await widget!.orderRef!.update({
-                                    ...createOrderRecordData(
-                                      paidDate: getCurrentTimestamp,
-                                      shippingMethod:
-                                          FFAppState().ShippingMethod,
-                                      shippingAddress: currentUserDocument
-                                          ?.defaultShippingAddress,
-                                      amount: functions.sumCartPrices(
-                                          checkOutOrderRecord.products
-                                              .toList()),
-                                      status: 'Approved',
-                                      paymentCompleted: true,
-                                      tax: 0.0,
-                                      paymentMethod: FFAppState().PaymentMethod,
-                                    ),
-                                    ...mapToFirestore(
-                                      {
-                                        'shipping_timeline':
-                                            FieldValue.arrayUnion([
-                                          getOrderDeliveryTimelineFirestoreData(
-                                            createOrderDeliveryTimelineStruct(
-                                              date: getCurrentTimestamp,
-                                              description: 'Order Started',
-                                              currentAddressOfPackage: '-',
-                                              clearUnsetFields: false,
-                                            ),
-                                            true,
-                                          )
-                                        ]),
-                                      },
-                                    ),
-                                  });
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Payment Successful!',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              color:
+                            Builder(
+                              builder: (context) {
+                                if (containerUsersRecord.isDistributor) {
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        30.0, 0.0, 30.0, 0.0),
+                                    child: StreamBuilder<List<ProductRecord>>(
+                                      stream: queryProductRecord(
+                                        queryBuilder: (productRecord) =>
+                                            productRecord.where(
+                                          'product_information.sold',
+                                          isEqualTo: valueOrDefault<int>(
+                                            checkOutOrderRecord.products.length,
+                                            0,
+                                          ),
+                                        ),
+                                        singleRecord: true,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 44.0,
+                                              height: 44.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              letterSpacing: 0.0,
+                                                      .primary,
+                                                ),
+                                              ),
                                             ),
-                                      ),
-                                      duration: Duration(milliseconds: 2000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
-                                  _model.updatedOrder10 =
-                                      await OrderRecord.getDocumentOnce(
-                                          widget!.orderRef!);
-                                  if (_model.promoCodeAdded != null) {
-                                    await widget!.orderRef!
-                                        .update(createOrderRecordData(
-                                      promoCode: _model.promoCodeAdded?.code,
-                                      discountOrPromo: _model
-                                          .promoCodeAdded?.discount
-                                          ?.toDouble(),
-                                    ));
-                                  }
+                                          );
+                                        }
+                                        List<ProductRecord>
+                                            buttondisProductRecordList =
+                                            snapshot.data!;
+                                        // Return an empty Container when the item does not exist.
+                                        if (snapshot.data!.isEmpty) {
+                                          return Container();
+                                        }
+                                        final buttondisProductRecord =
+                                            buttondisProductRecordList
+                                                    .isNotEmpty
+                                                ? buttondisProductRecordList
+                                                    .first
+                                                : null;
 
-                                  await widget!.orderRef!
-                                      .update(createOrderRecordData(
-                                    finalAmountPaid: (_model
-                                                .updatedOrder10!.amount -
-                                            ((_model.updatedOrder10!.amount *
-                                                    _model.updatedOrder10!
-                                                        .discountOrPromo) /
-                                                100)) +
-                                        _model.updatedOrder10!.tax,
-                                    status: OrderStatuses.Paid.name,
-                                  ));
+                                        return FFButtonWidget(
+                                          onPressed: () async {
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 500));
 
-                                  await widget!.orderRef!
-                                      .update(createOrderRecordData(
-                                    status: 'Paid',
-                                  ));
+                                            await widget!.orderRef!.update({
+                                              ...createOrderRecordData(
+                                                paidDate: getCurrentTimestamp,
+                                                shippingMethod:
+                                                    FFAppState().ShippingMethod,
+                                                shippingAddress:
+                                                    currentUserDocument
+                                                        ?.defaultShippingAddress,
+                                                amount:
+                                                    functions.sumCartPricesDIS(
+                                                        checkOutOrderRecord
+                                                            .products
+                                                            .toList()),
+                                                status: 'Approved',
+                                                paymentCompleted: true,
+                                                tax: 0.0,
+                                                paymentMethod:
+                                                    FFAppState().PaymentMethod,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'shipping_timeline':
+                                                      FieldValue.arrayUnion([
+                                                    getOrderDeliveryTimelineFirestoreData(
+                                                      createOrderDeliveryTimelineStruct(
+                                                        date:
+                                                            getCurrentTimestamp,
+                                                        description:
+                                                            'Order Started',
+                                                        currentAddressOfPackage:
+                                                            '-',
+                                                        clearUnsetFields: false,
+                                                      ),
+                                                      true,
+                                                    )
+                                                  ]),
+                                                },
+                                              ),
+                                            });
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Payment Successful!',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 2000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            _model.updatedOrder1 =
+                                                await OrderRecord
+                                                    .getDocumentOnce(
+                                                        widget!.orderRef!);
+                                            if (_model.promoCodeAdded != null) {
+                                              await widget!.orderRef!
+                                                  .update(createOrderRecordData(
+                                                promoCode:
+                                                    _model.promoCodeAdded?.code,
+                                                discountOrPromo: _model
+                                                    .promoCodeAdded?.discount
+                                                    ?.toDouble(),
+                                              ));
+                                            }
 
-                                  await currentUserDocument!.cartRef!.update({
-                                    ...createCartRecordData(
-                                      userRef: currentUserReference,
-                                    ),
-                                    ...mapToFirestore(
-                                      {
-                                        'products': FieldValue.delete(),
+                                            await widget!.orderRef!
+                                                .update(createOrderRecordData(
+                                              finalAmountPaid: (_model
+                                                          .updatedOrder1!
+                                                          .amount -
+                                                      ((_model.updatedOrder1!
+                                                                  .amount *
+                                                              _model
+                                                                  .updatedOrder1!
+                                                                  .finalAmountPaid) /
+                                                          100)) +
+                                                  _model.updatedOrder1!.tax,
+                                              status: OrderStatuses.Paid.name,
+                                            ));
+
+                                            await widget!.orderRef!
+                                                .update(createOrderRecordData(
+                                              status: 'Paid',
+                                            ));
+
+                                            await currentUserDocument!.cartRef!
+                                                .update({
+                                              ...createCartRecordData(
+                                                userRef: currentUserReference,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'products':
+                                                      FieldValue.delete(),
+                                                },
+                                              ),
+                                            });
+
+                                            await NotificationsRecord.collection
+                                                .doc()
+                                                .set(
+                                                    createNotificationsRecordData(
+                                                  subject: 'Payment Completed',
+                                                  message:
+                                                      'Your order now completed you can keep track of it from your order history page',
+                                                  userRef: currentUserReference,
+                                                  seen: false,
+                                                  date: getCurrentTimestamp,
+                                                ));
+                                            _model.updatedOrderFinal1 =
+                                                await OrderRecord
+                                                    .getDocumentOnce(
+                                                        widget!.orderRef!);
+
+                                            context.goNamed(
+                                              'E-Receipt',
+                                              queryParameters: {
+                                                'order': serializeParam(
+                                                  _model.updatedOrderFinal1,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'order':
+                                                    _model.updatedOrderFinal1,
+                                              },
+                                            );
+
+                                            safeSetState(() {});
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'qilqu28p' /* Continue to Payment */,
+                                          ),
+                                          icon: Icon(
+                                            Icons.arrow_right_alt,
+                                            size: 20.0,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 58.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 0.0, 20.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 10.0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        );
                                       },
                                     ),
-                                  });
-
-                                  await NotificationsRecord.collection
-                                      .doc()
-                                      .set(createNotificationsRecordData(
-                                        subject: 'Payment Completed',
-                                        message:
-                                            'Your order now completed you can keep track of it from your order history page',
-                                        userRef: currentUserReference,
-                                        seen: false,
-                                        date: getCurrentTimestamp,
-                                      ));
-                                  _model.updatedOrderFinal10 =
-                                      await OrderRecord.getDocumentOnce(
-                                          widget!.orderRef!);
-
-                                  context.goNamed(
-                                    'E-Receipt',
-                                    queryParameters: {
-                                      'order': serializeParam(
-                                        _model.updatedOrderFinal10,
-                                        ParamType.Document,
-                                      ),
-                                    }.withoutNulls,
-                                    extra: <String, dynamic>{
-                                      'order': _model.updatedOrderFinal10,
-                                    },
                                   );
-
-                                  safeSetState(() {});
-                                },
-                                text: FFLocalizations.of(context).getText(
-                                  'qilqu28p' /* Continue to Payment temp */,
-                                ),
-                                icon: Icon(
-                                  FFIcons.karrowRight,
-                                  size: 20.0,
-                                ),
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 58.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 0.0, 20.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        letterSpacing: 0.0,
+                                } else {
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        30.0, 0.0, 30.0, 0.0),
+                                    child: StreamBuilder<List<ProductRecord>>(
+                                      stream: queryProductRecord(
+                                        queryBuilder: (productRecord) =>
+                                            productRecord.where(
+                                          'product_information.sold',
+                                          isEqualTo: valueOrDefault<int>(
+                                            checkOutOrderRecord.products.length,
+                                            0,
+                                          ),
+                                        ),
+                                        singleRecord: true,
                                       ),
-                                  elevation: 10.0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 44.0,
+                                              height: 44.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<ProductRecord>
+                                            buttonregularProductRecordList =
+                                            snapshot.data!;
+                                        // Return an empty Container when the item does not exist.
+                                        if (snapshot.data!.isEmpty) {
+                                          return Container();
+                                        }
+                                        final buttonregularProductRecord =
+                                            buttonregularProductRecordList
+                                                    .isNotEmpty
+                                                ? buttonregularProductRecordList
+                                                    .first
+                                                : null;
+
+                                        return FFButtonWidget(
+                                          onPressed: () async {
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 500));
+
+                                            await widget!.orderRef!.update({
+                                              ...createOrderRecordData(
+                                                paidDate: getCurrentTimestamp,
+                                                shippingMethod:
+                                                    FFAppState().ShippingMethod,
+                                                shippingAddress:
+                                                    currentUserDocument
+                                                        ?.defaultShippingAddress,
+                                                amount: functions.sumCartPrices(
+                                                    checkOutOrderRecord.products
+                                                        .toList()),
+                                                status: 'Approved',
+                                                paymentCompleted: true,
+                                                tax: 0.0,
+                                                paymentMethod:
+                                                    FFAppState().PaymentMethod,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'shipping_timeline':
+                                                      FieldValue.arrayUnion([
+                                                    getOrderDeliveryTimelineFirestoreData(
+                                                      createOrderDeliveryTimelineStruct(
+                                                        date:
+                                                            getCurrentTimestamp,
+                                                        description:
+                                                            'Order Started',
+                                                        currentAddressOfPackage:
+                                                            '-',
+                                                        clearUnsetFields: false,
+                                                      ),
+                                                      true,
+                                                    )
+                                                  ]),
+                                                },
+                                              ),
+                                            });
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Payment Successful!',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 2000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            _model.updatedOrder =
+                                                await OrderRecord
+                                                    .getDocumentOnce(
+                                                        widget!.orderRef!);
+                                            if (_model.promoCodeAdded != null) {
+                                              await widget!.orderRef!
+                                                  .update(createOrderRecordData(
+                                                promoCode:
+                                                    _model.promoCodeAdded?.code,
+                                                discountOrPromo: _model
+                                                    .promoCodeAdded?.discount
+                                                    ?.toDouble(),
+                                              ));
+                                            }
+
+                                            await widget!.orderRef!
+                                                .update(createOrderRecordData(
+                                              finalAmountPaid: (_model
+                                                          .updatedOrder!
+                                                          .amount -
+                                                      ((_model.updatedOrder!
+                                                                  .amount *
+                                                              _model
+                                                                  .updatedOrder!
+                                                                  .discountOrPromo) /
+                                                          100)) +
+                                                  _model.updatedOrder!.tax,
+                                              status: OrderStatuses.Paid.name,
+                                            ));
+
+                                            await widget!.orderRef!
+                                                .update(createOrderRecordData(
+                                              status: 'Paid',
+                                            ));
+
+                                            await currentUserDocument!.cartRef!
+                                                .update({
+                                              ...createCartRecordData(
+                                                userRef: currentUserReference,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'products':
+                                                      FieldValue.delete(),
+                                                },
+                                              ),
+                                            });
+
+                                            await NotificationsRecord.collection
+                                                .doc()
+                                                .set(
+                                                    createNotificationsRecordData(
+                                                  subject: 'Payment Completed',
+                                                  message:
+                                                      'Your order now completed you can keep track of it from your order history page',
+                                                  userRef: currentUserReference,
+                                                  seen: false,
+                                                  date: getCurrentTimestamp,
+                                                ));
+                                            _model.updatedOrderFinal =
+                                                await OrderRecord
+                                                    .getDocumentOnce(
+                                                        widget!.orderRef!);
+
+                                            context.goNamed(
+                                              'E-Receipt',
+                                              queryParameters: {
+                                                'order': serializeParam(
+                                                  _model.updatedOrderFinal,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'order':
+                                                    _model.updatedOrderFinal,
+                                              },
+                                            );
+
+                                            safeSetState(() {});
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'vx99lqn3' /* Continue to Payment */,
+                                          ),
+                                          icon: Icon(
+                                            Icons.arrow_right_alt,
+                                            size: 20.0,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 58.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 0.0, 20.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 10.0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
                             ),
                           ],
                         ),

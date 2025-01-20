@@ -451,18 +451,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'RequestPin',
           path: '/requestPin',
+          requireAuth: true,
           builder: (context, params) => RequestPinWidget(),
         ),
         FFRoute(
           name: 'waitingRequest',
           path: '/waitingRequest',
-          builder: (context, params) => WaitingRequestWidget(),
-        ),
-        FFRoute(
-          name: 'addcard',
-          path: '/addcard',
           requireAuth: true,
-          builder: (context, params) => AddcardWidget(),
+          builder: (context, params) => WaitingRequestWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

@@ -236,25 +236,29 @@ class _RequestPinWidgetState extends State<RequestPinWidget> {
                               Align(
                                 alignment: AlignmentDirectional(0.0, -1.0),
                                 child: FFButtonWidget(
-                                  onPressed: () async {
-                                    await RequestPinRecord.createDoc(
-                                            currentUserReference!)
-                                        .set(createRequestPinRecordData(
-                                      email: currentUserEmail,
-                                      displayName: currentUserDisplayName,
-                                      photoUrl: currentUserPhoto,
-                                      uid: currentUserUid,
-                                      createdTime: getCurrentTimestamp,
-                                      phoneNumber: currentPhoneNumber,
-                                      userName: valueOrDefault(
-                                          currentUserDocument?.userName, ''),
-                                      uploadPhoto: _model.uploadedFileUrl,
-                                    ));
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 3000));
+                                  onPressed: (_model.uploadedFileUrl == null ||
+                                          _model.uploadedFileUrl == '')
+                                      ? null
+                                      : () async {
+                                          await RequestPinRecord.createDoc(
+                                                  currentUserReference!)
+                                              .set(createRequestPinRecordData(
+                                            email: currentUserEmail,
+                                            displayName: currentUserDisplayName,
+                                            photoUrl: currentUserPhoto,
+                                            uid: currentUserUid,
+                                            createdTime: getCurrentTimestamp,
+                                            phoneNumber: currentPhoneNumber,
+                                            userName: valueOrDefault(
+                                                currentUserDocument?.userName,
+                                                ''),
+                                            uploadPhoto: _model.uploadedFileUrl,
+                                          ));
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 3000));
 
-                                    context.goNamed('waitingRequest');
-                                  },
+                                          context.goNamed('waitingRequest');
+                                        },
                                   text: FFLocalizations.of(context).getText(
                                     'oxitaxet' /* Request */,
                                   ),

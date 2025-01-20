@@ -20,7 +20,6 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -1182,8 +1181,8 @@ class _CustomerSupportWidgetState extends State<CustomerSupportWidget>
                                               fillColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
-                                              icon: FaIcon(
-                                                FontAwesomeIcons.solidFileAlt,
+                                              icon: Icon(
+                                                FFIcons.kphotoPlus,
                                                 color: Color(0xFF333F47),
                                                 size: 24.0,
                                               ),

@@ -24,6 +24,8 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   late SettingItemModel addressesModel;
   // Model for paymethods.
   late SettingItemModel paymethodsModel1;
+  // Model for card.
+  late SettingItemModel cardModel;
   // Model for walet.
   late SettingItemModel waletModel;
   // Model for paymethods.
@@ -50,6 +52,7 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
     supportModel = createModel(context, () => SettingItemModel());
     addressesModel = createModel(context, () => SettingItemModel());
     paymethodsModel1 = createModel(context, () => SettingItemModel());
+    cardModel = createModel(context, () => SettingItemModel());
     waletModel = createModel(context, () => SettingItemModel());
     paymethodsModel2 = createModel(context, () => SettingItemModel());
     settingItemModel1 = createModel(context, () => SettingItemModel());
@@ -66,6 +69,7 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
     supportModel.dispose();
     addressesModel.dispose();
     paymethodsModel1.dispose();
+    cardModel.dispose();
     waletModel.dispose();
     paymethodsModel2.dispose();
     settingItemModel1.dispose();

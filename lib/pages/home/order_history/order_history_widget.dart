@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'order_history_model.dart';
@@ -33,6 +34,13 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
     super.initState();
     _model = createModel(context, () => OrderHistoryModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().cartItems =
+          FFAppState().cartItems.toList().cast<CartProductStruct>();
+      safeSetState(() {});
+    });
+
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
@@ -50,6 +58,8 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'OrderHistory',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),

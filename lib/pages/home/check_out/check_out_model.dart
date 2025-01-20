@@ -41,17 +41,13 @@ class CheckOutModel extends FlutterFlowModel<CheckOutWidget> {
   // Stores action output result for [Bottom Sheet - PromoAdd] action in IconButton widget.
   PromoCodesRecord? promoCode;
   // Stores action output result for [Backend Call - Read Document] action in buttondis widget.
-  OrderRecord? updatedOrder;
+  OrderRecord? updatedOrder1;
   // Stores action output result for [Backend Call - Read Document] action in buttondis widget.
   OrderRecord? updatedOrderFinal1;
   // Stores action output result for [Backend Call - Read Document] action in Buttonregular widget.
-  OrderRecord? updatedOrder1;
+  OrderRecord? updatedOrder;
   // Stores action output result for [Backend Call - Read Document] action in Buttonregular widget.
   OrderRecord? updatedOrderFinal;
-  // Stores action output result for [Backend Call - Read Document] action in Buttonregulartemp widget.
-  OrderRecord? updatedOrder10;
-  // Stores action output result for [Backend Call - Read Document] action in Buttonregulartemp widget.
-  OrderRecord? updatedOrderFinal10;
 
   @override
   void initState(BuildContext context) {

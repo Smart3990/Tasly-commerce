@@ -159,7 +159,7 @@ class _TransactionHistoryItemWidgetState
                                 widget!.amount,
                                 formatType: FormatType.decimal,
                                 decimalType: DecimalType.automatic,
-                                currency: '\$',
+                                currency: 'GHC ',
                               ),
                               '0',
                             ),

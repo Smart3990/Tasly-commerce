@@ -1066,7 +1066,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget>
                                                                           .bodyMedium
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Merriweather',
+                                                                                'Inter',
                                                                             fontSize:
                                                                                 24.0,
                                                                             letterSpacing:

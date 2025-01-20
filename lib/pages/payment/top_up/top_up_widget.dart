@@ -498,7 +498,8 @@ class _TopUpWidgetState extends State<TopUpWidget> {
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Inter',
-                                  color: Colors.white,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
                                   letterSpacing: 0.0,
                                 ),
                         elevation: 0.0,
