@@ -541,7 +541,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 20.0, 0.0),
+                                  20.0, 0.0, 20.0, 35.0),
                               child: AuthUserStreamWidget(
                                 builder: (context) => FFButtonWidget(
                                   onPressed: !valueOrDefault<bool>(

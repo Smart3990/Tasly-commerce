@@ -202,19 +202,43 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            formatNumber(
-                              widget!.product!.price * widget!.product!.count,
-                              formatType: FormatType.decimal,
-                              decimalType: DecimalType.automatic,
-                              currency: 'GHC ',
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  letterSpacing: 0.0,
-                                ),
+                          Builder(
+                            builder: (context) {
+                              if (valueOrDefault<bool>(
+                                  currentUserDocument?.isDistributor, false)) {
+                                return Text(
+                                  formatNumber(
+                                    widget!.product!.distributorPrice *
+                                        widget!.product!.count,
+                                    formatType: FormatType.decimal,
+                                    decimalType: DecimalType.automatic,
+                                    currency: 'GHC ',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                );
+                              } else {
+                                return Text(
+                                  formatNumber(
+                                    widget!.product!.price *
+                                        widget!.product!.count,
+                                    formatType: FormatType.decimal,
+                                    decimalType: DecimalType.automatic,
+                                    currency: 'GHC ',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                );
+                              }
+                            },
                           ),
                           Row(
                             mainAxisSize: MainAxisSize.max,

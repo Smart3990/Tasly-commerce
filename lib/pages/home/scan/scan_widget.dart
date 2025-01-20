@@ -181,21 +181,29 @@ class _ScanWidgetState extends State<ScanWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SelectionArea(
-                                      child: Text(
-                                    valueOrDefault<String>(
-                                      _model.scan,
-                                      '...',
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await launchURL(_model.scan!);
+                                    },
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        _model.scan,
+                                        '...',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  )),
+                                  ),
                                 ].divide(SizedBox(height: 16.0)),
                               ),
                             ),

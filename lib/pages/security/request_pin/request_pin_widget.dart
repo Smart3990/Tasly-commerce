@@ -281,6 +281,7 @@ class _RequestPinWidgetState extends State<RequestPinWidget> {
                                         ),
                                     elevation: 0.0,
                                     borderRadius: BorderRadius.circular(8.0),
+                                    disabledColor: Color(0xB28E9BA6),
                                   ),
                                 ),
                               ),
