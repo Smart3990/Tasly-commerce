@@ -35,6 +35,7 @@ class _SuccesmodalWidgetState extends State<SuccesmodalWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 3000));
       Navigator.pop(context);
+      context.safePop();
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
