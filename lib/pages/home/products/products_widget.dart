@@ -105,13 +105,23 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(14.0),
                             ),
-                            child: wrapWithModel(
-                              model: _model.specialOfferCardModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: SpecialOfferCardWidget(
-                                title: widget!.specialOffer!.title,
-                                description: widget!.specialOffer!.description,
-                                image: widget!.specialOffer!.image,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('distributotRegistration');
+                              },
+                              child: wrapWithModel(
+                                model: _model.specialOfferCardModel,
+                                updateCallback: () => safeSetState(() {}),
+                                child: SpecialOfferCardWidget(
+                                  title: widget!.specialOffer!.title,
+                                  description:
+                                      widget!.specialOffer!.description,
+                                  image: widget!.specialOffer!.image,
+                                ),
                               ),
                             ),
                           ),

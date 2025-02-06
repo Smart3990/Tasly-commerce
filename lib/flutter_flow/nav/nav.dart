@@ -459,6 +459,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/waitingRequest',
           requireAuth: true,
           builder: (context, params) => WaitingRequestWidget(),
+        ),
+        FFRoute(
+          name: 'distributotRegistration',
+          path: '/distributotRegistration',
+          requireAuth: true,
+          builder: (context, params) => DistributotRegistrationWidget(),
+        ),
+        FFRoute(
+          name: 'ApplicationStatus',
+          path: '/ApplicationStatus',
+          requireAuth: true,
+          builder: (context, params) => ApplicationStatusWidget(),
+        ),
+        FFRoute(
+          name: 'Alreadydistributor',
+          path: '/Alreadydistributor',
+          requireAuth: true,
+          builder: (context, params) => AlreadydistributorWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

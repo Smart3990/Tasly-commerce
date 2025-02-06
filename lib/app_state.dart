@@ -370,40 +370,6 @@ class FFAppState extends ChangeNotifier {
   void clearAllProductsCacheKey(String? uniqueKey) =>
       _allProductsManager.clearRequest(uniqueKey);
 
-  final _specialOfferSingleProductRefManager =
-      FutureRequestManager<SpecialOfferRecord>();
-  Future<SpecialOfferRecord> specialOfferSingleProductRef({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<SpecialOfferRecord> Function() requestFn,
-  }) =>
-      _specialOfferSingleProductRefManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearSpecialOfferSingleProductRefCache() =>
-      _specialOfferSingleProductRefManager.clear();
-  void clearSpecialOfferSingleProductRefCacheKey(String? uniqueKey) =>
-      _specialOfferSingleProductRefManager.clearRequest(uniqueKey);
-
-  final _productHasSpecialOfferManager =
-      FutureRequestManager<List<ProductRecord>>();
-  Future<List<ProductRecord>> productHasSpecialOffer({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<List<ProductRecord>> Function() requestFn,
-  }) =>
-      _productHasSpecialOfferManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearProductHasSpecialOfferCache() =>
-      _productHasSpecialOfferManager.clear();
-  void clearProductHasSpecialOfferCacheKey(String? uniqueKey) =>
-      _productHasSpecialOfferManager.clearRequest(uniqueKey);
-
   final _specialOffersAllManager =
       FutureRequestManager<List<SpecialOfferRecord>>();
   Future<List<SpecialOfferRecord>> specialOffersAll({

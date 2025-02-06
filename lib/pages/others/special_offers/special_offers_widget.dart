@@ -1,6 +1,5 @@
-import '/backend/backend.dart';
 import '/components/other_component/header/header_widget.dart';
-import '/components/specialoffer_c_omp/special_offer_card/special_offer_card_widget.dart';
+import '/components/other_component/setting_item/setting_item_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -68,97 +67,56 @@ class _SpecialOffersWidgetState extends State<SpecialOffersWidget> {
                       showBackButton: true,
                     ),
                   ),
-                  FutureBuilder<List<ProductRecord>>(
-                    future: FFAppState().productHasSpecialOffer(
-                      requestFn: () => queryProductRecordOnce(
-                        queryBuilder: (productRecord) => productRecord.where(
-                          'special_offer',
-                          isEqualTo: true,
-                        ),
-                      ),
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 44.0,
-                            height: 44.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.goNamed('distributotRegistration');
+                          },
+                          child: wrapWithModel(
+                            model: _model.becomeadistributorModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: SettingItemWidget(
+                              walet: FFLocalizations.of(context).getText(
+                                'n4ov7ci0' /* Become a distributor  */,
+                              ),
+                              icon: Icon(
+                                FFIcons.ksquareLetterD,
                               ),
                             ),
                           ),
-                        );
-                      }
-                      List<ProductRecord> listViewProductRecordList =
-                          snapshot.data!;
-
-                      return ListView.separated(
-                        padding: EdgeInsets.fromLTRB(
-                          0,
-                          24.0,
-                          0,
-                          24.0,
                         ),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewProductRecordList.length,
-                        separatorBuilder: (_, __) => SizedBox(height: 16.0),
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewProductRecord =
-                              listViewProductRecordList[listViewIndex];
-                          return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 0.0, 20.0, 0.0),
-                            child: FutureBuilder<SpecialOfferRecord>(
-                              future: FFAppState().specialOfferSingleProductRef(
-                                uniqueQueryKey: valueOrDefault<String>(
-                                  listViewProductRecord.reference.id,
-                                  'productID',
-                                ),
-                                requestFn: () =>
-                                    SpecialOfferRecord.getDocumentOnce(
-                                        listViewProductRecord.specialOfferRef!),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.goNamed('Alreadydistributor');
+                          },
+                          child: wrapWithModel(
+                            model: _model.alreadyadistributorModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: SettingItemWidget(
+                              walet: FFLocalizations.of(context).getText(
+                                '5c76haq4' /* Already a distributor  */,
                               ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 44.0,
-                                      height: 44.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-
-                                final specialOfferCardSpecialOfferRecord =
-                                    snapshot.data!;
-
-                                return SpecialOfferCardWidget(
-                                  key: Key(
-                                      'Key9kq_${listViewIndex}_of_${listViewProductRecordList.length}'),
-                                  title:
-                                      specialOfferCardSpecialOfferRecord.title,
-                                  description:
-                                      specialOfferCardSpecialOfferRecord
-                                          .description,
-                                  image:
-                                      specialOfferCardSpecialOfferRecord.image,
-                                );
-                              },
+                              icon: Icon(
+                                Icons.tag_faces,
+                              ),
                             ),
-                          );
-                        },
-                      );
-                    },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

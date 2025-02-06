@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/other_component/on_board_complete_modal/on_board_complete_modal_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -15,21 +14,20 @@ import 'package:provider/provider.dart';
 class SecurityPassModel extends FlutterFlowModel<SecurityPassWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for securitypassfield widget.
-  FocusNode? securitypassfieldFocusNode;
-  TextEditingController? securitypassfieldTextController;
-  late bool securitypassfieldVisibility;
-  String? Function(BuildContext, String?)?
-      securitypassfieldTextControllerValidator;
+  // State field(s) for securitypa widget.
+  FocusNode? securitypaFocusNode;
+  TextEditingController? securitypaTextController;
+  late bool securitypaVisibility;
+  String? Function(BuildContext, String?)? securitypaTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
-    securitypassfieldVisibility = false;
+    securitypaVisibility = false;
   }
 
   @override
   void dispose() {
-    securitypassfieldFocusNode?.dispose();
-    securitypassfieldTextController?.dispose();
+    securitypaFocusNode?.dispose();
+    securitypaTextController?.dispose();
   }
 }

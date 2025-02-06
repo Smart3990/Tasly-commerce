@@ -1,6 +1,5 @@
-import '/backend/backend.dart';
 import '/components/other_component/header/header_widget.dart';
-import '/components/specialoffer_c_omp/special_offer_card/special_offer_card_widget.dart';
+import '/components/other_component/setting_item/setting_item_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -15,14 +14,22 @@ class SpecialOffersModel extends FlutterFlowModel<SpecialOffersWidget> {
 
   // Model for Header component.
   late HeaderModel headerModel;
+  // Model for becomeadistributor.
+  late SettingItemModel becomeadistributorModel;
+  // Model for Alreadyadistributor.
+  late SettingItemModel alreadyadistributorModel;
 
   @override
   void initState(BuildContext context) {
     headerModel = createModel(context, () => HeaderModel());
+    becomeadistributorModel = createModel(context, () => SettingItemModel());
+    alreadyadistributorModel = createModel(context, () => SettingItemModel());
   }
 
   @override
   void dispose() {
     headerModel.dispose();
+    becomeadistributorModel.dispose();
+    alreadyadistributorModel.dispose();
   }
 }

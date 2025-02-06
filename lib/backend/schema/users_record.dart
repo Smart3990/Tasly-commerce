@@ -132,6 +132,51 @@ class UsersRecord extends FirestoreRecord {
   String get securityPass => _securityPass ?? '';
   bool hasSecurityPass() => _securityPass != null;
 
+  // "residentialaddress" field.
+  String? _residentialaddress;
+  String get residentialaddress => _residentialaddress ?? '';
+  bool hasResidentialaddress() => _residentialaddress != null;
+
+  // "nationalIDCard" field.
+  String? _nationalIDCard;
+  String get nationalIDCard => _nationalIDCard ?? '';
+  bool hasNationalIDCard() => _nationalIDCard != null;
+
+  // "marriageStatus" field.
+  String? _marriageStatus;
+  String get marriageStatus => _marriageStatus ?? '';
+  bool hasMarriageStatus() => _marriageStatus != null;
+
+  // "nationality" field.
+  String? _nationality;
+  String get nationality => _nationality ?? '';
+  bool hasNationality() => _nationality != null;
+
+  // "religion" field.
+  String? _religion;
+  String get religion => _religion ?? '';
+  bool hasReligion() => _religion != null;
+
+  // "AccName" field.
+  String? _accName;
+  String get accName => _accName ?? '';
+  bool hasAccName() => _accName != null;
+
+  // "AccNumber" field.
+  String? _accNumber;
+  String get accNumber => _accNumber ?? '';
+  bool hasAccNumber() => _accNumber != null;
+
+  // "bankName" field.
+  String? _bankName;
+  String get bankName => _bankName ?? '';
+  bool hasBankName() => _bankName != null;
+
+  // "bankBranch" field.
+  String? _bankBranch;
+  String get bankBranch => _bankBranch ?? '';
+  bool hasBankBranch() => _bankBranch != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -157,6 +202,15 @@ class UsersRecord extends FirestoreRecord {
     _isPro = snapshotData['isPro'] as bool?;
     _distributorId = snapshotData['DistributorId'] as String?;
     _securityPass = snapshotData['securityPass'] as String?;
+    _residentialaddress = snapshotData['residentialaddress'] as String?;
+    _nationalIDCard = snapshotData['nationalIDCard'] as String?;
+    _marriageStatus = snapshotData['marriageStatus'] as String?;
+    _nationality = snapshotData['nationality'] as String?;
+    _religion = snapshotData['religion'] as String?;
+    _accName = snapshotData['AccName'] as String?;
+    _accNumber = snapshotData['AccNumber'] as String?;
+    _bankName = snapshotData['bankName'] as String?;
+    _bankBranch = snapshotData['bankBranch'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -214,6 +268,15 @@ Map<String, dynamic> createUsersRecordData({
   bool? isPro,
   String? distributorId,
   String? securityPass,
+  String? residentialaddress,
+  String? nationalIDCard,
+  String? marriageStatus,
+  String? nationality,
+  String? religion,
+  String? accName,
+  String? accNumber,
+  String? bankName,
+  String? bankBranch,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -238,6 +301,15 @@ Map<String, dynamic> createUsersRecordData({
       'isPro': isPro,
       'DistributorId': distributorId,
       'securityPass': securityPass,
+      'residentialaddress': residentialaddress,
+      'nationalIDCard': nationalIDCard,
+      'marriageStatus': marriageStatus,
+      'nationality': nationality,
+      'religion': religion,
+      'AccName': accName,
+      'AccNumber': accNumber,
+      'bankName': bankName,
+      'bankBranch': bankBranch,
     }.withoutNulls,
   );
 
@@ -272,7 +344,16 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isDistributor == e2?.isDistributor &&
         e1?.isPro == e2?.isPro &&
         e1?.distributorId == e2?.distributorId &&
-        e1?.securityPass == e2?.securityPass;
+        e1?.securityPass == e2?.securityPass &&
+        e1?.residentialaddress == e2?.residentialaddress &&
+        e1?.nationalIDCard == e2?.nationalIDCard &&
+        e1?.marriageStatus == e2?.marriageStatus &&
+        e1?.nationality == e2?.nationality &&
+        e1?.religion == e2?.religion &&
+        e1?.accName == e2?.accName &&
+        e1?.accNumber == e2?.accNumber &&
+        e1?.bankName == e2?.bankName &&
+        e1?.bankBranch == e2?.bankBranch;
   }
 
   @override
@@ -299,7 +380,16 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isDistributor,
         e?.isPro,
         e?.distributorId,
-        e?.securityPass
+        e?.securityPass,
+        e?.residentialaddress,
+        e?.nationalIDCard,
+        e?.marriageStatus,
+        e?.nationality,
+        e?.religion,
+        e?.accName,
+        e?.accNumber,
+        e?.bankName,
+        e?.bankBranch
       ]);
 
   @override

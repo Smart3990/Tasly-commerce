@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/other_component/on_board_complete_modal/on_board_complete_modal_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -34,8 +33,8 @@ class _SecurityPassWidgetState extends State<SecurityPassWidget> {
     super.initState();
     _model = createModel(context, () => SecurityPassModel());
 
-    _model.securitypassfieldTextController ??= TextEditingController();
-    _model.securitypassfieldFocusNode ??= FocusNode();
+    _model.securitypaTextController ??= TextEditingController();
+    _model.securitypaFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -92,76 +91,72 @@ class _SecurityPassWidgetState extends State<SecurityPassWidget> {
                           ),
                     ),
                     TextFormField(
-                      controller: _model.securitypassfieldTextController,
-                      focusNode: _model.securitypassfieldFocusNode,
+                      controller: _model.securitypaTextController,
+                      focusNode: _model.securitypaFocusNode,
                       autofocus: false,
-                      obscureText: !_model.securitypassfieldVisibility,
+                      obscureText: !_model.securitypaVisibility,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'y99jew8i' /* Enter Security Pass */,
+                          'wymxdcny' /* Enter Security Pass */,
                         ),
                         labelStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Inter',
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Urbanist',
                                   letterSpacing: 0.0,
-                                ),
-                        hintStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Inter',
-                                  letterSpacing: 0.0,
+                                  useGoogleFonts: false,
                                 ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: Color(0x00000000),
                             width: 1.0,
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
+                            color: FlutterFlowTheme.of(context).primaryText,
                             width: 1.0,
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
+                            color: FlutterFlowTheme.of(context).error,
                             width: 1.0,
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
+                            color: FlutterFlowTheme.of(context).error,
                             width: 1.0,
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        contentPadding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 25.0, 16.0, 25.0),
+                        fillColor: FlutterFlowTheme.of(context).tfBackground,
+                        contentPadding:
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         suffixIcon: InkWell(
                           onTap: () => safeSetState(
-                            () => _model.securitypassfieldVisibility =
-                                !_model.securitypassfieldVisibility,
+                            () => _model.securitypaVisibility =
+                                !_model.securitypaVisibility,
                           ),
                           focusNode: FocusNode(skipTraversal: true),
                           child: Icon(
-                            _model.securitypassfieldVisibility
+                            _model.securitypaVisibility
                                 ? Icons.visibility_outlined
                                 : Icons.visibility_off_outlined,
                             size: 22,
                           ),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).titleSmall.override(
-                            fontFamily: 'Inter',
+                      style: FlutterFlowTheme.of(context).labelLarge.override(
+                            fontFamily: 'Urbanist',
+                            color: FlutterFlowTheme.of(context).primaryText,
                             letterSpacing: 0.0,
+                            useGoogleFonts: false,
                           ),
-                      minLines: 1,
                       maxLength: 6,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
                       buildCounter: (context,
@@ -170,60 +165,55 @@ class _SecurityPassWidgetState extends State<SecurityPassWidget> {
                               maxLength}) =>
                           null,
                       keyboardType: TextInputType.number,
-                      validator: _model.securitypassfieldTextControllerValidator
+                      validator: _model.securitypaTextControllerValidator
                           .asValidator(context),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 40.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await currentUserReference!
-                              .update(createUsersRecordData(
-                            securityPass:
-                                _model.securitypassfieldTextController.text,
-                          ));
-                          FFAppState().securityPass = true;
-                          safeSetState(() {});
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: OnBoardCompleteModalWidget(),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          '8obmfcl0' /* Continue */,
-                        ),
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 58.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                          elevation: 10.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 1.0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 10.0, 24.0, 10.0),
+                        child: FFButtonWidget(
+                          onPressed: (_model.securitypaTextController.text ==
+                                      null ||
+                                  _model.securitypaTextController.text == '')
+                              ? null
+                              : () async {
+                                  await currentUserReference!
+                                      .update(createUsersRecordData(
+                                    securityPass:
+                                        _model.securitypaTextController.text,
+                                  ));
+                                  FFAppState().securityPass = true;
+                                  safeSetState(() {});
+                                },
+                          text: FFLocalizations.of(context).getText(
+                            'y0pvuipb' /* Continue */,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 54.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).buttonBlack,
+                            textStyle:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Inter',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      letterSpacing: 0.0,
+                                    ),
+                            elevation: 10.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            disabledColor:
+                                FlutterFlowTheme.of(context).grayTextMiddle,
+                          ),
                         ),
                       ),
                     ),
