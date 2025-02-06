@@ -66,7 +66,7 @@ class _SecurityChoiceWidgetState extends State<SecurityChoiceWidget> {
                     updateCallback: () => safeSetState(() {}),
                     child: HeaderWidget(
                       title: FFLocalizations.of(context).getText(
-                        'vkbumnqp' /* Set Second Security Mesure */,
+                        'vkbumnqp' /* Set Security Mesure */,
                       ),
                       showBackButton: false,
                     ),

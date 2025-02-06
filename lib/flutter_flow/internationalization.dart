@@ -2147,7 +2147,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // SecurityChoice
   {
     'vkbumnqp': {
-      'en': 'Set Second Security Mesure',
+      'en': 'Set Security Mesure',
       'ar': 'ضبط مقياس الأمان الثاني',
       'es': 'Establecer una segunda medida de seguridad',
       'fr': 'Définir une deuxième mesure de sécurité',

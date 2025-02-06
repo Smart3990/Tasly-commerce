@@ -709,34 +709,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                     .transparent,
                                                             onTap: () async {
                                                               context.pushNamed(
-                                                                'Products',
-                                                                queryParameters:
-                                                                    {
-                                                                  'pageTitle':
-                                                                      serializeParam(
-                                                                    'Special Offer',
-                                                                    ParamType
-                                                                        .String,
-                                                                  ),
-                                                                  'specialOffer':
-                                                                      serializeParam(
-                                                                    pageViewSpecialOfferRecord,
-                                                                    ParamType
-                                                                        .Document,
-                                                                  ),
-                                                                  'showSpecialOffer':
-                                                                      serializeParam(
-                                                                    true,
-                                                                    ParamType
-                                                                        .bool,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                                extra: <String,
-                                                                    dynamic>{
-                                                                  'specialOffer':
-                                                                      pageViewSpecialOfferRecord,
-                                                                },
-                                                              );
+                                                                  'SpecialOffers');
                                                             },
                                                             child:
                                                                 SpecialOfferCardWidget(
